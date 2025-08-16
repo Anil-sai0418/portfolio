@@ -228,7 +228,7 @@ export default function Projects() {
             style={{ height: "auto", minHeight: "380px", width: "100%" }}
           >
           <img
-            src="/Nutrify-app.png"
+            src="NUtrify.png"
             alt="Nutrify App"
             className="h-[200px] sm:h-[220px] w-full object-cover rounded-t-lg transition-transform duration-300 hover:scale-105"
           />
@@ -246,7 +246,7 @@ export default function Projects() {
                 A nutrition tracking app that helps users log meals, track calories, and receive dietary recommendations using Next.js and MongoDB.
               </p>
               <div className="flex flex-wrap gap-1 sm:gap-2 mt-3">
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">Next.js</span>
+               
                 <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">TailwindCSS</span>
                 <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">MongoDB</span>
                 <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">React</span>
@@ -289,7 +289,7 @@ export default function Projects() {
             style={{ height: "auto", minHeight: "380px", width: "100%" }}
           >
           <img
-            src="/Compiler.webp"
+            src="Pyhononlinecomplier.png"
             alt="Online Python Compiler"
             className="h-[200px] sm:h-[220px] w-[90%] object-cover rounded-t-lg transition-transform duration-300 hover:scale-105 mx-auto"
           />
@@ -429,7 +429,7 @@ export default function Projects() {
                 A contact management app with search, add, and delete functionalities, featuring a responsive UI and MongoDB backend.
               </p>
               <div className="flex flex-wrap gap-1 sm:gap-2 mt-3">
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">Next.js</span>
+
                 <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">TailwindCSS</span>
                 <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">MongoDB</span>
                 <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">React</span>

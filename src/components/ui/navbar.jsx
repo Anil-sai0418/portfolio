@@ -93,7 +93,7 @@ export function NavbarDemo({ children }) {
                   <DrawerFooter className="flex">
                     <NavbarButton
                       as="a"
-                      href="https"
+                      href="https://drive.google.com/file/d/1fgA4WBUBecf0-6BcZdn0-sLZFcDw4MaL/view?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
                       variant="primary"
