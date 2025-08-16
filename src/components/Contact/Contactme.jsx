@@ -1,3 +1,4 @@
+
 import { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { FaInstagram, FaEnvelope, FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
@@ -41,10 +42,10 @@ export default function ContactMe() {
       ref={containerRef}
       className="relative flex min-h-screen w-full items-center justify-center bg-black/70 backdrop-blur-[6px] overflow-hidden opacity-0 translate-y-8"
     >
-      {/* Background with radial dots */}
+      {/* Background with radial dots and parallax */}
       <div
         className={cn(
-          "absolute inset-0 z-0",
+          "absolute inset-0 z-0 bg-fixed",
           "[background-size:24px_24px] [background-image:radial-gradient(#d4d4d4_0.8px,transparent_0.8px)]",
           "dark:[background-image:radial-gradient(#404040_0.8px,transparent_0.8px)]",
           "transition-all duration-500"
@@ -88,7 +89,7 @@ export default function ContactMe() {
         <footer className="w-full text-center py-6 text-gray-300 bg-transparent relative z-10 animate-bounceIn animation-delay-800">
           <div className="flex flex-col items-center gap-3">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-300">Anil Sai Nunna | Full Stack Developer</h2>
-          <a
+            <a
               href="https://drive.google.com/file/d/1_vkSr8AT5B56rL3zPel53NNv6v5pDUD4/view?usp=sharing"
               className="inline-block bg-white/10 hover:bg-white/20 border border-white/10 backdrop-blur-md rounded-lg px-4 py-2 text-white text-sm font-medium transition shadow hover:scale-105"
               target="_blank"

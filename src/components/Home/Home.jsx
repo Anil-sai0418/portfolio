@@ -3,7 +3,6 @@ import * as THREE from "three";
 import { cn } from "../../utlis/utlis";
 
 export default function Home() {
-  
   const sceneRef = useRef();
   const animationRef = useRef();
 
@@ -23,10 +22,10 @@ export default function Home() {
     { text: "experiences.", className: "text-green-700 dark:text-green-600" },
   ];
 
-  const marqueeItems = ["Let's connect",  "open to work", "Bring Vision To Execution ", "Hire Me"];
+  const marqueeItems = ["Let's connect", "Open to work", "Bring Vision To Execution", "Hire Me"];
 
   useEffect(() => {
-    // Create scene, camera, and renderer
+    // Existing Three.js logic (unchanged)
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -40,7 +39,6 @@ export default function Home() {
 
     camera.position.z = 50;
 
-    // Create wave grid
     const rows = 40;
     const cols = 80;
     const separation = 2;
@@ -70,10 +68,8 @@ export default function Home() {
 
     scene.add(pointCloud);
 
-    // Store references
     sceneRef.current = { scene, camera, renderer, geometry };
 
-    // Animation loop
     function animate() {
       animationRef.current = requestAnimationFrame(animate);
       
@@ -96,7 +92,6 @@ export default function Home() {
     
     animate();
 
-    // Handle resize
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -105,7 +100,6 @@ export default function Home() {
 
     window.addEventListener('resize', handleResize);
 
-    // Cleanup
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
@@ -123,10 +117,7 @@ export default function Home() {
         className="relative flex min-h-screen w-full items-center justify-center bg-white/5 dark:bg-black/10 backdrop-blur-xl text-gray-900 dark:text-white overflow-hidden"
         id="home"
       >
-        {/* Three.js wave background */}
         <div id="wave-background" className="absolute inset-0 z-0" />
-
-        {/* Subtle grid and radial gradient overlay */}
         <div
           className={cn(
             "absolute inset-0 z-0",
@@ -147,13 +138,8 @@ export default function Home() {
           <div className="relative flex items-center justify-center">
             <div className="absolute z-0 w-[90vw] sm:w-[600px] md:w-[700px] lg:w-[850px] h-[60vh] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-full opacity-0 pointer-events-none" />
             <div className="relative flex flex-col items-center z-10 px-4 sm:px-6 md:px-8 lg:px-10 py-6 sm:py-8 md:py-10 max-w-[95%] sm:max-w-3xl md:max-w-4xl mx-auto">
-              
-              {/* Text flip component */}
-             
-
-              {/* Name and headline */}
               <h1
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-center mb-4 sm:mb-6 animate-slideInUp animation-delay-200 cursor-default text-transparent bg-clip-text bg-gray-200/70 dark:bg-white/40 backdrop-blur-md"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-center mb-4 sm:mb-6 animate-slideInUp animation-delay-200 cursor-default text-white sm:text-transparent sm:bg-clip-text sm:bg-gray-200/70 sm:dark:bg-white/40 sm:backdrop-blur-md"
                 style={{
                   WebkitTextStroke: "1px rgba(0, 0, 0, 0.2)",
                   WebkitTextStrokeColor: "var(--tw-prose-body)",
@@ -169,7 +155,6 @@ export default function Home() {
                 ))}
               </h1>
               
-              {/* Subtitle */}
               <h2 className="text-center text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-gray-700 dark:text-gray-300 mt-2 sm:mt-3 mb-4 sm:mb-6 font-normal animate-slideInUp animation-delay-400">
                 <span className="font-bold text-gray-900 dark:text-gray-200">Full-stack developer</span>
                 {" focused on "}
@@ -178,12 +163,13 @@ export default function Home() {
                 <span className="font-bold text-gray-900 dark:text-gray-200">Problem Solver.</span>
               </h2>
 
-              <footer className="w-[50%] max-w-3xl overflow-hidden relative h-[60px] flex items-center bg-gradient-to-r from-white/20 via-white/10 to-white/20 dark:from-white/10 dark:via-white/5 dark:to-white/10 backdrop-blur-xl shadow-lg rounded-lg border border-white/20">
-                <div className="flex animate-footer-marquee w-full">
+              {/* Updated Marquee */}
+              <footer className="w-full max-w-4xl overflow-hidden relative h-16 sm:h-20 flex items-center bg-gradient-to-r from-white/10 via-white/5 to-white/10 dark:from-gray-900/10 dark:via-gray-900/5 dark:to-gray-900/10 backdrop-blur-xl shadow-glass rounded-xl border border-white/20 hover:pause-marquee">
+                <div className="flex animate-marquee whitespace-nowrap">
                   {[...marqueeItems, ...marqueeItems].map((item, index) => (
                     <span
                       key={index}
-                      className="flex-shrink-0 mx-4 bg-gradient-to-r from-gray-100/60 via-white/40 to-gray-100/60 dark:from-gray-800/60 dark:via-gray-900/40 dark:to-gray-800/60 px-5 py-2 rounded-full backdrop-blur-md shadow-md text-gray-900 dark:text-gray-100 font-semibold text-base tracking-wide"
+                      className="flex-shrink-0 mx-4 sm:mx-6 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-white/20 via-white/30 to-white/20 dark:from-gray-800/30 dark:via-gray-800/40 dark:to-gray-800/30 rounded-full backdrop-blur-md shadow-md text-gray-900 dark:text-gray-100 font-semibold text-sm sm:text-base tracking-wide transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:bg-white/30 dark:hover:bg-gray-700/30"
                     >
                       {item}
                     </span>
@@ -194,7 +180,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Inline CSS for animations */}
+        {/* Updated Inline CSS */}
         <style jsx>{`
           @keyframes fadeIn {
             from { opacity: 0; }
@@ -204,7 +190,7 @@ export default function Home() {
             from { transform: translateY(20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
           }
-          @keyframes footer-marquee {
+          @keyframes marquee {
             0% {
               transform: translateX(0);
             }
@@ -228,10 +214,13 @@ export default function Home() {
           .animate-slideInUp {
             animation: slideInUp 0.8s ease-out;
           }
-          .animate-footer-marquee {
+          .animate-marquee {
             display: flex;
-            animation: footer-marquee 5s linear infinite;
-            white-space: nowrap;
+            animation: marquee 12s linear infinite;
+            will-change: transform;
+          }
+          .hover:pause-marquee:hover .animate-marquee {
+            animation-play-state: paused;
           }
           .animation-delay-200 {
             animation-delay: 0.2s;
@@ -242,7 +231,7 @@ export default function Home() {
             animation-fill-mode: both;
           }
           .shadow-glass {
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05);
           }
           #wave-background canvas {
             display: block;

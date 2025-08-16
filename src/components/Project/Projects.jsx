@@ -164,11 +164,13 @@ export default function Projects() {
             className="rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105 opacity-0 translate-y-8"
             style={{ height: "auto", minHeight: "380px", width: "100%" }}
           >
-          <img
-            src="/Monkey-type.png"
-            alt="Monkey Type"
-            className="h-[200px] sm:h-[220px] w-full object-cover rounded-t-lg transition-transform duration-300 hover:scale-105"
-          />
+      <div class="relative w-full h-[200px] sm:h-[220px] overflow-hidden rounded-t-lg">
+  <img
+    src="/Typesprint.png"
+    alt="Monkey Type"
+    class="h-full w-full object-contain rounded-t-lg transition-transform duration-300 hover:scale-105"
+  />
+</div>
           <div className="rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
             style={{ WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)" }}>
             <div
@@ -178,7 +180,7 @@ export default function Projects() {
                 backdropFilter: "blur(10px)",
               }}
             >
-              <h3 className="text-base sm:text-lg font-bold text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)]">Monkey Type</h3>
+              <h3 className="text-base sm:text-lg font-bold text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)]">TypeSprint</h3>
               <p className="text-xs sm:text-sm mt-2 text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)] line-clamp-3">
                 A typing speed test application with real-time feedback, leaderboards, and customizable themes built with Next.js and MongoDB.
               </p>

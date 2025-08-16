@@ -53,7 +53,7 @@ export function NavbarDemo({ children }) {
               className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg px-6 py-3 text-white font-semibold shadow-lg transition-all duration-300 hover:bg-white/30 hover:border-white/50"
             >
               <a
-                href="https://drive.google.com/file/d/1_vkSr8AT5B56rL3zPel53NNv6v5pDUD4/view?usp=sharing"
+                href="https://drive.google.com/file/d/1fgA4WBUBecf0-6BcZdn0-sLZFcDw4MaL/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full text-center"
@@ -68,7 +68,7 @@ export function NavbarDemo({ children }) {
         <MobileNav className="lg:hidden">
           <MobileNavHeader>
             <NavbarLogo />
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 ">
               <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <DrawerTrigger>
                   <MobileNavToggle
@@ -76,14 +76,14 @@ export function NavbarDemo({ children }) {
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   />
                 </DrawerTrigger>
-                <DrawerContent>
+                <DrawerContent className="bg-white/20 dark:bg-white/10 backdrop-blur-xl border border-white/30 text-white font-bold shadow-2xl">
                   <DrawerHeader>
                     <DrawerDescription className="flex flex-col gap-3 pt-4 items-center">
                       {navItems.map(({ name, link }, index) => (
                         <button
                           key={index}
                           onClick={() => scrollToSection(link.substring(1))}
-                          className="text-lg text-gray-700 dark:text-gray-300 hover:text-indigo-600 hover:bg-indigo-100 dark:hover:bg-gray-900 py-2 w-full max-w-xs text-center rounded-md transition-colors duration-200"
+                          className="text-lg text-white bg-white/10 backdrop-blur-md py-2 w-full max-w-xs text-center rounded-md hover:bg-white/20 transition-all duration-200"
                         >
                           {name}
                         </button>
@@ -93,11 +93,11 @@ export function NavbarDemo({ children }) {
                   <DrawerFooter className="flex">
                     <NavbarButton
                       as="a"
-                      href="https://drive.google.com/file/d/1_vkSr8AT5B56rL3zPel53NNv6v5pDUD4/view?usp=sharing"
+                      href="https"
                       target="_blank"
                       rel="noopener noreferrer"
                       variant="primary"
-                      className="w-full bg-white/20 backdrop-blur-md border border-white/30 rounded-lg px-6 py-3 text-white font-semibold shadow-lg transition-all duration-300 hover:bg-white/30 hover:border-white/50"
+                      className="w-full bg-gradient-to-r from-blue-500/30 to-cyan-500/30 backdrop-blur-md border border-white/30 rounded-lg px-6 py-3 text-white font-semibold shadow-lg transition-all duration-300 hover:from-blue-500/50 hover:to-cyan-500/50 hover:border-white/50"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Resume
