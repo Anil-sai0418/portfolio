@@ -53,7 +53,7 @@ export function NavbarDemo({ children }) {
               className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg px-6 py-3 text-white font-semibold shadow-lg transition-all duration-300 hover:bg-white/30 hover:border-white/50"
             >
               <a
-                href="https://drive.google.com/file/d/1fgA4WBUBecf0-6BcZdn0-sLZFcDw4MaL/view?usp=sharing"
+                href="https://drive.google.com/file/d/1v7TF-kPk1R4vR_l2O3FhrQtmyw9Ut6Yk/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full text-center"
@@ -93,7 +93,7 @@ export function NavbarDemo({ children }) {
                   <DrawerFooter className="flex">
                     <NavbarButton
                       as="a"
-                      href="https://drive.google.com/file/d/1fgA4WBUBecf0-6BcZdn0-sLZFcDw4MaL/view?usp=sharing"
+                      href=" https://drive.google.com/file/d/1v7TF-kPk1R4vR_l2O3FhrQtmyw9Ut6Yk/view?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
                       variant="primary"

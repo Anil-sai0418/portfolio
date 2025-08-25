@@ -1,18 +1,26 @@
 import { useEffect, useRef } from 'react';
 
+// Check if the device is mobile
+const isMobile =
+  typeof window !== "undefined" &&
+  (window.innerWidth <= 768 ||
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      typeof navigator !== "undefined" ? navigator.userAgent : ""
+    ));
+
 function SplashCursor({
-  SIM_RESOLUTION = 128,
-  DYE_RESOLUTION = 1440,
+  SIM_RESOLUTION = isMobile ? 64 : 128,
+  DYE_RESOLUTION = isMobile ? 512 : 1440,
   CAPTURE_RESOLUTION = 512,
   DENSITY_DISSIPATION = 2.5,
   VELOCITY_DISSIPATION = 2,
   PRESSURE = 0.1,
-  PRESSURE_ITERATIONS = 20,
+  PRESSURE_ITERATIONS = isMobile ? 10 : 20,
   CURL = 2.2,
   SPLAT_RADIUS = 0.012,
-  SPLAT_FORCE = 4500,
-  SHADING = true,
-  COLOR_UPDATE_SPEED = 5,
+  SPLAT_FORCE = isMobile ? 2000 : 4500,
+  SHADING = isMobile ? false : true,
+  COLOR_UPDATE_SPEED = isMobile ? 3 : 5,
   BACK_COLOR = { r: 0.0, g: 0.0, b: 0.0 }, // Black background
   TRANSPARENT = true, // Enable transparency
 }) {
