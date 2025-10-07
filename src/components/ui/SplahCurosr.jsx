@@ -10,12 +10,12 @@ const isMobile =
 
 function SplashCursor({
   SIM_RESOLUTION = isMobile ? 64 : 128,
-  DYE_RESOLUTION = isMobile ? 512 : 1440,
+  DYE_RESOLUTION = isMobile ? 512 : 1024, // Reduced from 1440 to 1024 for better performance on desktop
   CAPTURE_RESOLUTION = 512,
   DENSITY_DISSIPATION = 2.5,
   VELOCITY_DISSIPATION = 2,
   PRESSURE = 0.1,
-  PRESSURE_ITERATIONS = isMobile ? 10 : 20,
+  PRESSURE_ITERATIONS = isMobile ? 10 : 15, // Reduced from 20 to 15 for better performance on desktop
   CURL = 2.2,
   SPLAT_RADIUS = 0.012,
   SPLAT_FORCE = isMobile ? 2000 : 4500,
@@ -27,6 +27,7 @@ function SplashCursor({
   const canvasRef = useRef(null);
   const lastInteractionTime = useRef(Date.now());
   const isOverButton = useRef(false);
+  const isFaded = useRef(true); // Start as faded to avoid initial computations
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -790,20 +791,25 @@ function SplashCursor({
       const fadeOutTime = 500; // Decreased to 0.5 seconds for shorter visibility
 
       if (timeSinceInteraction > fadeOutTime && !isInteracting) {
-        // Clear the canvas to make it fully transparent
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-        gl.clearColor(0.0, 0.0, 0.0, 0.0);
-        gl.clear(gl.COLOR_BUFFER_BIT);
-        // Clear dye and velocity buffers
-        clearProgram.bind();
-        gl.uniform1f(clearProgram.uniforms.value, 0.0);
-        gl.uniform1i(clearProgram.uniforms.uTexture, dye.read.attach(0));
-        blit(dye.write);
-        dye.swap();
-        gl.uniform1i(clearProgram.uniforms.uTexture, velocity.read.attach(0));
-        blit(velocity.write);
-        velocity.swap();
+        if (!isFaded.current) {
+          // Clear the canvas to make it fully transparent
+          gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+          gl.clearColor(0.0, 0.0, 0.0, 0.0);
+          gl.clear(gl.COLOR_BUFFER_BIT);
+          // Clear dye and velocity buffers
+          clearProgram.bind();
+          gl.uniform1f(clearProgram.uniforms.value, 0.0);
+          gl.uniform1i(clearProgram.uniforms.uTexture, dye.read.attach(0));
+          blit(dye.write);
+          dye.swap();
+          gl.uniform1i(clearProgram.uniforms.uTexture, velocity.read.attach(0));
+          blit(velocity.write);
+          velocity.swap();
+          isFaded.current = true;
+        }
+        // Else do nothing to avoid unnecessary computations
       } else {
+        isFaded.current = false;
         updateColors(dt);
         applyInputs();
         step(dt);
@@ -1171,7 +1177,6 @@ function SplashCursor({
       let posY = scaleByPixelRatio(e.clientY);
       let color = generateColor();
       checkIfOverButton(e.clientX, e.clientY);
-      updateFrame();
       updatePointerMoveData(pointer, posX, posY, color);
       document.body.removeEventListener('mousemove', handleFirstMouseMove);
     });
@@ -1192,7 +1197,6 @@ function SplashCursor({
         let posX = scaleByPixelRatio(touches[i].clientX);
         let posY = scaleByPixelRatio(touches[i].clientY);
         checkIfOverButton(touches[i].clientX, touches[i].clientY);
-        updateFrame();
         updatePointerDownData(pointer, touches[i].identifier, posX, posY);
       }
       document.body.removeEventListener('touchstart', handleFirstTouchStart);

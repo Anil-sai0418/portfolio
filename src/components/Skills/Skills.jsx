@@ -16,6 +16,7 @@ export default function Skills() {
     { name: "Express.js", src: "/express.webp", category: "backend" },
     { name: "MongoDB", src: "/mongodb.webp", category: "backend" },
     { name: "Python", src: "/python.webp", category: "backend" },
+    { name: "MySQL", src: "/mysql.png", category: "backend" },
   ];
 
 
