@@ -243,7 +243,7 @@ export default function Projects() {
             >
               <h3 className="text-base sm:text-lg font-bold text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)]">Nutrify App</h3>
               <p className="text-xs sm:text-sm mt-2 text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)] line-clamp-3">
-                A nutrition tracking app that helps users log meals, track calories, and receive dietary recommendations using Next.js and MongoDB.
+                A lightweight notes app that allows users to create, edit, and delete notes easily with a clean and responsive interface
               </p>
               <div className="flex flex-wrap gap-1 sm:gap-2 mt-3">
                
@@ -253,7 +253,7 @@ export default function Projects() {
               </div>
               <div className="flex gap-2 sm:gap-4 mt-4">
                 <a
-                  href="https://github.com/Anil-sai0418/Nutrify-App"
+                  href="https://github.com/Anil-sai0418/online-notes"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
@@ -266,7 +266,7 @@ export default function Projects() {
                   Code
                 </a>
                 <a
-                  href="https://nutrify-app-anil.vercel.app/"
+                  href="https://online-notes-five.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
@@ -426,17 +426,18 @@ export default function Projects() {
             >
               <h3 className="text-base sm:text-lg font-bold text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)]">Phone Book</h3>
               <p className="text-xs sm:text-sm mt-2 text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)] line-clamp-3">
-                A contact management app with search, add, and delete functionalities, featuring a responsive UI and MongoDB backend.
+                A contact management app with search, add, and delete functionalities, featuring Apples glass UI .
               </p>
               <div className="flex flex-wrap gap-1 sm:gap-2 mt-3">
 
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">TailwindCSS</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">MongoDB</span>
                 <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">React</span>
+                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">MongoDB</span>
+                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">Node.js</span>
+                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">TailwindCSS</span>
               </div>
               <div className="flex gap-2 sm:gap-4 mt-4">
                 <a
-                  href="https://github.com/Anil-sai0418/Phone-Book"
+                  href="https://github.com/Anil-sai0418/Anil-s-phone-book"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
@@ -449,7 +450,7 @@ export default function Projects() {
                   Code
                 </a>
                 <a
-                  href="https://phone-book-anil.vercel.app/"
+                  href="https://anil-s-phone-book.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
