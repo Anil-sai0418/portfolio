@@ -36,24 +36,163 @@ const styles = `
   }
 `;
 
+// ✅ Reusable ProjectCard Component
+function ProjectCard({ project, cardRef }) {
+  const isTypeSprint = project.title === "TypeSprint";
+  const isPythonCompiler = project.title === "Online Python Compiler";
+
+  return (
+    <div
+      ref={cardRef}
+      className="rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105 opacity-0 translate-y-8"
+      style={{ height: "auto", minHeight: "380px", width: "100%" }}
+    >
+      {isTypeSprint ? (
+        <div className="relative w-full h-[200px] sm:h-[220px] overflow-hidden rounded-t-lg">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="h-full w-full object-contain rounded-t-lg transition-transform duration-300 hover:scale-105"
+          />
+        </div>
+      ) : (
+        <img
+          src={project.image}
+          alt={project.title}
+          className={`${
+            isPythonCompiler
+              ? "h-[200px] sm:h-[220px] w-[90%] mx-auto object-cover"
+              : "h-[200px] sm:h-[220px] w-full object-cover"
+          } rounded-t-lg transition-transform duration-300 hover:scale-105`}
+        />
+      )}
+
+      <div
+        className="rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+        style={{ WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)" }}
+      >
+        <div
+          className="px-4 sm:px-6 py-4 flex flex-col justify-between min-h-[180px]"
+          style={{
+            WebkitBackdropFilter: "blur(10px)",
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          <h3 className="text-base sm:text-lg font-bold text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)]">
+            {project.title}
+          </h3>
+          <p className="text-xs sm:text-sm mt-2 text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)] line-clamp-3">
+            {project.description}
+          </p>
+
+          <div className="flex flex-wrap gap-1 sm:gap-2 mt-3">
+            {project.technologies.map((tech, index) => (
+              <span
+                key={index}
+                className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex gap-2 sm:gap-4 mt-4">
+            <a
+              href={project.codeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <Github className="w-3 h-3 sm:w-4 sm:h-4" /> Code
+            </a>
+            <a
+              href={project.liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" /> Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Projects() {
-  // Refs for project cards
-  const cardRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
+  const projects = [
+    {
+      image: "/Task-manager.png",
+      title: "Task Manager",
+      description:
+        "A full-stack task manager with built-in credit/debit tracking, authentication, and dynamic balance updates using Node.js and MongoDB.",
+      technologies: ["React.js", "TailwindCSS", "MongoDB", "Node.js"],
+      codeLink: "https://github.com/Anil-sai0418/Task-manager",
+      liveLink: "https://task-manager-anil.vercel.app/",
+    },
+    {
+      image: "/Typesprint.png",
+      title: "TypeSprint",
+      description:
+        "A typing speed test app with real-time feedback, leaderboards, and customizable themes built using Next.js and MongoDB.",
+      technologies: ["Next.js", "TailwindCSS", "MongoDB", "React"],
+      codeLink: "https://github.com/Anil-sai0418/Monkey-Type",
+      liveLink: "https://monkey-type-anil.vercel.app/",
+    },
+    {
+      image: "/NUtrify.png",
+      title: "Notes App",
+      description:
+        "A lightweight notes app that allows users to create, edit, and delete notes easily with a clean and responsive interface.",
+      technologies: ["React", "TailwindCSS","LocalStorage"],
+      codeLink: "https://github.com/Anil-sai0418/online-notes",
+      liveLink: "https://online-notes-five.vercel.app/",
+    },
+    {
+      image: "/Pyhononlinecomplier.png",
+      title: "Online Python Compiler",
+      description:
+        "An online Python compiler with a real-time editor and support for multiple Python versions using Next.js.",
+      technologies: ["Next.js", "TailwindCSS", "MongoDB", "React"],
+      codeLink: "https://github.com/Anil-sai0418/Online-Python-Compiler",
+      liveLink: "https://python-compiler-anil.vercel.app/",
+    },
+    {
+      image: "/Resume.webp",
+      title: "ATS Checker",
+      description:
+        "A resume optimization tool that analyzes resumes for ATS compatibility and provides keyword improvement tips.",
+      technologies: ["Next.js", "TailwindCSS", "MongoDB", "React"],
+      codeLink: "https://github.com/Anil-sai0418/ATS-Checker",
+      liveLink: "https://ats-checker-anil.vercel.app/",
+    },
+    {
+      image: "/Phone-book.png",
+      title: "Phone Book",
+      description:
+        "A contact management app with search, add, and delete features, designed with Apple's glass UI aesthetics.",
+      technologies: ["React", "Node.js", "MongoDB", "TailwindCSS"],
+      codeLink: "https://github.com/Anil-sai0418/Anil-s-phone-book",
+      liveLink: "https://anil-s-phone-book.vercel.app/",
+    },
+  ];
+
+  const cardRefs = projects.map(() => useRef(null));
   const delays = [0, 0.15, 0.3, 0.45, 0.6, 0.75];
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     const observers = [];
+
     cardRefs.forEach((ref, idx) => {
       if (!ref.current) return;
       const observer = new window.IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              // Add animation class and remove initial hidden classes
               entry.target.classList.add("project-card-enter");
               entry.target.classList.remove("opacity-0", "translate-y-8");
-              // Set animationDelay for stagger effect
               entry.target.style.animationDelay = `${delays[idx]}s`;
               observer.unobserve(entry.target);
             }
@@ -64,25 +203,26 @@ export default function Projects() {
       observer.observe(ref.current);
       observers.push(observer);
     });
-    // Cleanup
-    return () => {
-      observers.forEach((observer) => observer.disconnect());
-    };
-    // eslint-disable-next-line
+
+    return () => observers.forEach((observer) => observer.disconnect());
   }, []);
 
   return (
     <div className="animate-pageEnter">
-      <div id="projects" className="relative flex w-full flex-col items-center justify-start py-8 sm:py-12 bg-white dark:bg-black">
+      <div id="projects" className="relative flex flex-col items-center py-8 sm:py-12 bg-white dark:bg-black">
         <style>{styles}</style>
-        <div className="relative flex flex-col items-center justify-center text-center z-10 px-4 pt-12 sm:pt-20">
-          <p className="text-white text-2xl sm:text-3xl lg:text-4xl transition duration-300 hover:text-white hover:scale-105 cursor-default font-bold">
+
+        {/* Header */}
+        <div className="relative flex flex-col items-center text-center z-10 px-4 pt-12 sm:pt-20">
+          <p className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold hover:scale-105 transition">
             Projects
           </p>
-          <p className="text-gray-300 text-xs sm:text-sm mt-2 transition duration-300 hover:text-white hover:scale-105 cursor-default font-bold max-w-md mx-auto">
+          <p className="text-gray-300 text-xs sm:text-sm mt-2 font-bold hover:scale-105 transition max-w-md">
             Showcasing my passion for innovation through creative and impactful projects
           </p>
         </div>
+
+        {/* Background Grid */}
         <div
           className={cn(
             "absolute inset-0",
@@ -90,382 +230,15 @@ export default function Projects() {
             "[background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)]",
             "dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]"
           )}
-          style={{
-            animation: "moveBackground 10s linear infinite",
-          }}
+          style={{ animation: "moveBackground 10s linear infinite" }}
         />
         <div className="pointer-events-none absolute top-0 left-0 right-0 h-[400px] sm:h-[500px] lg:h-[600px] bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black z-0" />
-        <div className="mt-8 sm:mt-12 lg:mt-16 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 w-[90%] sm:w-[85%] lg:w-[80%] h-auto max-w-6xl z-0 px-2 sm:px-0">
-          {/* Card 0 */}
-          <div
-            ref={cardRefs[0]}
-            className="rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105 opacity-0 translate-y-8"
-            style={{ height: "auto", minHeight: "380px", width: "100%" }}
-          >
-          <img
-            src="/Task-manager.png"
-            alt="Task Manager"
-            className="h-[200px] sm:h-[220px] w-full object-cover rounded-t-lg transition-transform duration-300 hover:scale-105"
-          />
-          <div className="rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]" style={{ WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)" }}>
-            <div
-              className="px-4 sm:px-6 py-4 flex flex-col justify-between min-h-[180px] rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10"
-              style={{
-                WebkitBackdropFilter: "blur(10px)",
-                backdropFilter: "blur(10px)",
-              }}
-            >
-              <h3 className="text-base sm:text-lg font-bold text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)]">
-                Task Manager
-              </h3>
-              <p className="text-xs sm:text-sm mt-2 text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)] line-clamp-3">
-                A full-stack task manager with built-in credit/debit tracking, authentication, and dynamic balance updates using Node.js and MongoDB.
-              </p>
-              <div className="flex flex-wrap gap-1 sm:gap-2 mt-3">
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">React.js</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">TailwindCSS</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">MongoDB</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">Node.js</span>
-              </div>
-              <div className="flex gap-2 sm:gap-4 mt-4">
-                <a
-                  href="https://github.com/Anil-sai0418/Task-manager"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
-                  style={{
-                    WebkitBackdropFilter: "blur(10px)",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <Github className="w-3 h-3 sm:w-4 sm:h-4" />
-                  Code
-                </a>
-                <a
-                  href="https://task-manager-anil.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
-                  style={{
-                    WebkitBackdropFilter: "blur(10px)",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-          {/* Card 1 */}
-          <div
-            ref={cardRefs[1]}
-            className="rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105 opacity-0 translate-y-8"
-            style={{ height: "auto", minHeight: "380px", width: "100%" }}
-          >
-      <div class="relative w-full h-[200px] sm:h-[220px] overflow-hidden rounded-t-lg">
-  <img
-    src="/Typesprint.png"
-    alt="Monkey Type"
-    class="h-full w-full object-contain rounded-t-lg transition-transform duration-300 hover:scale-105"
-  />
-</div>
-          <div className="rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-            style={{ WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)" }}>
-            <div
-              className="px-4 sm:px-6 py-4 flex flex-col justify-between min-h-[180px] rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10"
-              style={{
-                WebkitBackdropFilter: "blur(10px)",
-                backdropFilter: "blur(10px)",
-              }}
-            >
-              <h3 className="text-base sm:text-lg font-bold text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)]">TypeSprint</h3>
-              <p className="text-xs sm:text-sm mt-2 text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)] line-clamp-3">
-                A typing speed test application with real-time feedback, leaderboards, and customizable themes built with Next.js and MongoDB.
-              </p>
-              <div className="flex flex-wrap gap-1 sm:gap-2 mt-3">
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">Next.js</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">TailwindCSS</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">MongoDB</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">React</span>
-              </div>
-              <div className="flex gap-2 sm:gap-4 mt-4">
-                <a
-                  href="https://github.com/Anil-sai0418/Monkey-Type"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
-                  style={{
-                    WebkitBackdropFilter: "blur(10px)",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <Github className="w-3 h-3 sm:w-4 sm:h-4" />
-                  Code
-                </a>
-                <a
-                  href="https://monkey-type-anil.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
-                  style={{
-                    WebkitBackdropFilter: "blur(10px)",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-          {/* Card 2 */}
-          <div
-            ref={cardRefs[2]}
-            className="rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105 opacity-0 translate-y-8"
-            style={{ height: "auto", minHeight: "380px", width: "100%" }}
-          >
-          <img
-            src="NUtrify.png"
-            alt="Nutrify App"
-            className="h-[200px] sm:h-[220px] w-full object-cover rounded-t-lg transition-transform duration-300 hover:scale-105"
-          />
-          <div className="rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-            style={{ WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)" }}>
-            <div
-              className="px-4 sm:px-6 py-4 flex flex-col justify-between min-h-[180px] rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10"
-              style={{
-                WebkitBackdropFilter: "blur(10px)",
-                backdropFilter: "blur(10px)",
-              }}
-            >
-              <h3 className="text-base sm:text-lg font-bold text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)]">Nutrify App</h3>
-              <p className="text-xs sm:text-sm mt-2 text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)] line-clamp-3">
-                A lightweight notes app that allows users to create, edit, and delete notes easily with a clean and responsive interface
-              </p>
-              <div className="flex flex-wrap gap-1 sm:gap-2 mt-3">
-               
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">TailwindCSS</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">MongoDB</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">React</span>
-              </div>
-              <div className="flex gap-2 sm:gap-4 mt-4">
-                <a
-                  href="https://github.com/Anil-sai0418/online-notes"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
-                  style={{
-                    WebkitBackdropFilter: "blur(10px)",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <Github className="w-3 h-3 sm:w-4 sm:h-4" />
-                  Code
-                </a>
-                <a
-                  href="https://online-notes-five.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
-                  style={{
-                    WebkitBackdropFilter: "blur(10px)",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-          {/* Card 3 */}
-          <div
-            ref={cardRefs[3]}
-            className="rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105 opacity-0 translate-y-8"
-            style={{ height: "auto", minHeight: "380px", width: "100%" }}
-          >
-          <img
-            src="Pyhononlinecomplier.png"
-            alt="Online Python Compiler"
-            className="h-[200px] sm:h-[220px] w-[90%] object-cover rounded-t-lg transition-transform duration-300 hover:scale-105 mx-auto"
-          />
-          <div className="rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-            style={{ WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)" }}>
-            <div
-              className="px-4 sm:px-6 py-4 flex flex-col justify-between min-h-[180px] rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10"
-              style={{
-                WebkitBackdropFilter: "blur(10px)",
-                backdropFilter: "blur(10px)",
-              }}
-            >
-              <h3 className="text-base sm:text-lg font-bold text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)]">Online Python Compiler</h3>
-              <p className="text-xs sm:text-sm mt-2 text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)] line-clamp-3">
-                An online Python compiler with a code editor, real-time execution, and support for multiple Python versions using Next.js.
-              </p>
-              <div className="flex flex-wrap gap-1 sm:gap-2 mt-3">
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">Next.js</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">TailwindCSS</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">MongoDB</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">React</span>
-              </div>
-              <div className="flex gap-2 sm:gap-4 mt-4">
-                <a
-                  href="https://github.com/Anil-sai0418/Online-Python-Compiler"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
-                  style={{
-                    WebkitBackdropFilter: "blur(10px)",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <Github className="w-3 h-3 sm:w-4 sm:h-4" />
-                  Code
-                </a>
-                <a
-                  href="https://python-compiler-anil.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
-                  style={{
-                    WebkitBackdropFilter: "blur(10px)",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-          {/* Card 4 */}
-          <div
-            ref={cardRefs[4]}
-            className="rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105 opacity-0 translate-y-8"
-            style={{ height: "auto", minHeight: "380px", width: "100%" }}
-          >
-          <img
-            src="/Resume.webp"
-            alt="ATS Checker"
-            className="h-[200px] sm:h-[220px] w-full object-cover rounded-t-lg transition-transform duration-300 hover:scale-105"
-          />
-          <div className="rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-            style={{ WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)" }}>
-            <div
-              className="px-4 sm:px-6 py-4 flex flex-col justify-between min-h-[180px] rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10"
-              style={{
-                WebkitBackdropFilter: "blur(10px)",
-                backdropFilter: "blur(10px)",
-              }}
-            >
-              <h3 className="text-base sm:text-lg font-bold text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)]">ATS Checker</h3>
-              <p className="text-xs sm:text-sm mt-2 text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)] line-clamp-3">
-                A resume optimization tool that analyzes resumes for ATS compatibility, providing keyword suggestions and formatting tips.
-              </p>
-              <div className="flex flex-wrap gap-1 sm:gap-2 mt-3">
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">Next.js</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">TailwindCSS</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">MongoDB</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">React</span>
-              </div>
-              <div className="flex gap-2 sm:gap-4 mt-4">
-                <a
-                  href="https://github.com/Anil-sai0418/ATS-Checker"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
-                  style={{
-                    WebkitBackdropFilter: "blur(10px)",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <Github className="w-3 h-3 sm:w-4 sm:h-4" />
-                  Code
-                </a>
-                <a
-                  href="https://ats-checker-anil.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
-                  style={{
-                    WebkitBackdropFilter: "blur(10px)",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-          {/* Card 5 */}
-          <div
-            ref={cardRefs[5]}
-            className="rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105 opacity-0 translate-y-8"
-            style={{ height: "auto", minHeight: "380px", width: "100%" }}
-          >
-          <img
-            src="/Phone-book.png"
-            alt="Phone Book"
-            className="h-[200px] sm:h-[220px] w-full object-cover rounded-t-lg transition-transform duration-300 hover:scale-105"
-          />
-          <div className="rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-            style={{ WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)" }}>
-            <div
-              className="px-4 sm:px-6 py-4 flex flex-col justify-between min-h-[180px] rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10"
-              style={{
-                WebkitBackdropFilter: "blur(10px)",
-                backdropFilter: "blur(10px)",
-              }}
-            >
-              <h3 className="text-base sm:text-lg font-bold text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)]">Phone Book</h3>
-              <p className="text-xs sm:text-sm mt-2 text-white dark:text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)] line-clamp-3">
-                A contact management app with search, add, and delete functionalities, featuring Apples glass UI .
-              </p>
-              <div className="flex flex-wrap gap-1 sm:gap-2 mt-3">
 
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">React</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">MongoDB</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">Node.js</span>
-                <span className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded">TailwindCSS</span>
-              </div>
-              <div className="flex gap-2 sm:gap-4 mt-4">
-                <a
-                  href="https://github.com/Anil-sai0418/Anil-s-phone-book"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
-                  style={{
-                    WebkitBackdropFilter: "blur(10px)",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <Github className="w-3 h-3 sm:w-4 sm:h-4" />
-                  Code
-                </a>
-                <a
-                  href="https://anil-s-phone-book.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white backdrop-blur-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-1 sm:gap-2"
-                  style={{
-                    WebkitBackdropFilter: "blur(10px)",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Project Cards */}
+        <div className="mt-8 sm:mt-12 lg:mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-[90%] sm:w-[85%] lg:w-[80%] max-w-6xl px-2">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.title} project={project} cardRef={cardRefs[index]} />
+          ))}
         </div>
       </div>
     </div>
