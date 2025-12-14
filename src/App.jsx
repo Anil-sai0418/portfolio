@@ -37,6 +37,15 @@ function App() {
     }
   }, []);
 
+  // Track window width for conditional rendering
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div className="dark bg-black text-white">
       <>
@@ -109,7 +118,7 @@ function App() {
           </div>
         ) : (
           <>
-            <SplashCursor />
+            {windowWidth >= 1024 && <SplashCursor />}
             <NavbarDemo>
               <Home />
               <Aboutme />
