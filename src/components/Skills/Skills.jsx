@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 
 
@@ -27,20 +26,21 @@ export default function Skills() {
 
 
   useEffect(() => {
-    const elements = document.querySelectorAll(".will-change-transform");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.remove("opacity-0", "translate-y-6");
-          entry.target.classList.add("opacity-100", "translate-y-0");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
+    const elements = document.querySelectorAll(".skill-card");
 
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("skill-card-enter");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
 
-    elements.forEach(el => observer.observe(el));
-
+    elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, [filteredSkills]);
@@ -149,7 +149,7 @@ export default function Skills() {
               key={index}
               aria-label={`${skill.name} skill`}
               role="listitem"
-              className="opacity-0 translate-y-6 w-full sm:w-[30%] lg:w-[22%] h-16 sm:h-20 rounded-lg flex flex-row justify-center items-center gap-2 sm:gap-5 text-black dark:text-white bg-white/80 dark:bg-white/10 border border-gray-200 dark:border-white/10 backdrop-blur-lg shadow-md dark:shadow-[0_0_10px_#ffffff33] transition-all duration-700 ease-out transform hover:scale-105 hover:shadow-xl hover:bg-white/90 dark:hover:bg-white/20 will-change-transform perspective-1000 group skill-card-enter"
+              className="skill-card w-full sm:w-[30%] lg:w-[22%] h-16 sm:h-20 rounded-lg flex flex-row justify-center items-center gap-2 sm:gap-5 text-black dark:text-white bg-white/80 dark:bg-white/10 border border-gray-200 dark:border-white/10 backdrop-blur-lg shadow-md dark:shadow-[0_0_10px_#ffffff33] transition-all duration-500 ease-out transform will-change-transform perspective-1000 group"
               style={{ animationDelay: `${index * 0.15}s` }}
             >
               <img src={skill.src} alt={`${skill.name} Icon`} className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 group-hover:rotate-6 transition-transform duration-300" />
@@ -160,6 +160,11 @@ export default function Skills() {
       </div>
       </div>
       <style jsx global>{`
+        .skill-card {
+          opacity: 1;
+          transform: translateY(40px) scale(0.9);
+          pointer-events: auto;
+        }
         @keyframes moveDotsCircular {
           0% { background-position: 0% 0%; }
           25% { background-position: 10% 20%; }
@@ -180,11 +185,23 @@ export default function Skills() {
         @keyframes skillCardEnter {
           0% {
             opacity: 0;
-            transform: translateY(30px) scale(0.95) rotateX(10deg);
+            transform: translateY(40px) scale(0.9);
+          }
+          60% {
+            opacity: 1;
+            transform: translateY(-6px) scale(1.03);
           }
           100% {
             opacity: 1;
-            transform: translateY(0) scale(1) rotateX(0);
+            transform: translateY(0) scale(1);
+          }
+        }
+        @keyframes softGlow {
+          0% {
+            box-shadow: 0 0 0 rgba(255,255,255,0.0);
+          }
+          100% {
+            box-shadow: 0 0 18px rgba(255,255,255,0.6);
           }
         }
         .animate-pageEnter {
@@ -194,6 +211,9 @@ export default function Skills() {
           animation: skillCardEnter 0.6s ease-out forwards;
           animation-fill-mode: both;
           transform-origin: center;
+        }
+        .skill-card.skill-card-enter {
+          opacity: 1;
         }
       `}</style>
     </>
