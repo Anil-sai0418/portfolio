@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
+import StaggerContainer, { StaggerItem } from '../ui/StaggerContainer';
 
 const skills = [
   { name: "HTML", src: "/html.webp", category: "frontend" },
@@ -103,33 +104,32 @@ export default function Skills() {
 
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 w-full max-w-6xl">
+        <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 w-full max-w-6xl">
           <AnimatePresence mode='popLayout'>
             {filteredSkills.map((skill, index) => (
-              <motion.div
+              <StaggerItem
                 key={skill.name}
-                layout
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.3 }}
-                whileHover={{ y: -5, scale: 1.05 }}
                 className="group relative flex flex-col items-center justify-center p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm hover:bg-white/10 hover:border-white/20 transition-colors duration-300 aspect-square"
               >
-                {/* Glow Effect on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
+                <motion.div
+                  whileHover={{ y: -5, scale: 1.05 }}
+                  className="contents"
+                >
+                  {/* Glow Effect on Hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
 
-                <div className="relative z-10 p-3 bg-[#0a0a0a] rounded-xl border border-white/10 shadow-lg mb-3 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-shadow duration-300">
-                  <img src={skill.src} alt={skill.name} className="w-10 h-10 object-contain" />
-                </div>
+                  <div className="relative z-10 p-3 bg-[#0a0a0a] rounded-xl border border-white/10 shadow-lg mb-3 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-shadow duration-300">
+                    <img src={skill.src} alt={skill.name} className="w-10 h-10 object-contain" />
+                  </div>
 
-                <h3 className="text-white/80 font-medium tracking-wide text-sm group-hover:text-white transition-colors duration-300">
-                  {skill.name}
-                </h3>
-              </motion.div>
+                  <h3 className="text-white/80 font-medium tracking-wide text-sm group-hover:text-white transition-colors duration-300">
+                    {skill.name}
+                  </h3>
+                </motion.div>
+              </StaggerItem>
             ))}
           </AnimatePresence>
-        </div>
+        </StaggerContainer>
 
       </div>
     </div>

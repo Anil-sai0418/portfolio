@@ -126,10 +126,11 @@ const MagneticButton = ({ children, className }) => {
 const ProjectCard = ({ project, index }) => {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1.0] }}
+            whileHover={{ y: -10, transition: { duration: 0.4, ease: "easeOut" } }}
             className="flex-shrink-0 w-[85vw] md:w-[600px] lg:w-[700px] h-[70vh] md:h-[600px] relative group rounded-3xl overflow-hidden bg-[#111] border border-white/5 shadow-2xl"
         >
             {/* Background Image with Zoom Effect */}
