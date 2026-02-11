@@ -45,7 +45,7 @@ const AboutMe = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/40 to-transparent opacity-30 blur-sm rounded-xl" />
 
                 <div className="relative bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-xl p-6 overflow-hidden">
-                  <p className="text-lg text-white/90 leading-relaxed font-light font-['Dancing_Script']">
+                  <p className="text-3xl text-white/90 leading-relaxed font-saint">
                     “Success begins with a single belief — that you are capable.
                     Trust yourself, take action, and watch possibilities turn into reality.”
                   </p>
@@ -61,9 +61,9 @@ const AboutMe = () => {
 
           <div className="flex justify-center relative">
             <ScrollReveal direction="left" delay={0.4}>
-              <div className="relative w-full max-w-[500px] aspect-video rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl group">
+              <div className="relative w-full max-w-[450px] aspect-[3/4] rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl group">
                 <motion.img
-                  src="/Gemini_Generated_Image_r9f98hr9f98hr9f9 (1).png"
+                  src="./Anil_sai.png"
                   alt="Profile placeholder"
                   className="w-full h-full object-cover object-top"
                   whileHover={{ scale: 1.05 }}
