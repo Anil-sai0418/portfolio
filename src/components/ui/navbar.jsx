@@ -21,7 +21,7 @@ import {
 
 export function NavbarDemo({ children }) {
   const navItems = [
-    { name: "Home", link: "#home" },
+    // { name: "Home", link: "#home" },
     { name: "About Me", link: "#about" },
     { name: "Skills", link: "#skills" },
     { name: "Projects", link: "#projects" },

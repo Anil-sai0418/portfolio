@@ -1,246 +1,315 @@
-import { cn } from "@/lib/utils";
-import { ExternalLink, Github } from "lucide-react";
-import { useEffect, useRef } from "react";
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useSpring, useMotionValue, useMotionTemplate } from 'framer-motion';
+import { ArrowRight, ExternalLink, Github, Layers, Zap, Code2, Box, Cpu, Link } from 'lucide-react';
+import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
-const styles = `
-  @keyframes moveBackground {
-    0% { background-position: 0 0; }
-    100% { background-position: 40px 40px; }
-  }
-  @keyframes pageEnter {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  .animate-pageEnter {
-    animation: pageEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-  @keyframes projectCardEnter {
-    0% {
-      opacity: 0;
-      transform: translateY(30px) scale(0.95);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-  .project-card-enter {
-    animation: projectCardEnter 0.6s ease-out both;
-    transform-origin: center;
-  }
-`;
-
-// ✅ Reusable ProjectCard Component
-function ProjectCard({ project, cardRef }) {
-  const isTypeSprint = project.title === "TypeSprint";
-  const isPythonCompiler = project.title === "Online Python Compiler";
-
-  return (
-    <div
-      ref={cardRef}
-      className="rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105 opacity-0 translate-y-8"
-      style={{ height: "auto", minHeight: "380px", width: "100%" }}
-    >
-      {isTypeSprint ? (
-        <div className="relative w-full h-[200px] sm:h-[220px] overflow-hidden rounded-t-lg">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="h-full w-full object-contain rounded-t-lg transition-transform duration-300 hover:scale-105"
-          />
-        </div>
-      ) : (
-        <img
-          src={project.image}
-          alt={project.title}
-          className={`${
-            isPythonCompiler
-              ? "h-[200px] sm:h-[220px] w-[90%] mx-auto object-cover"
-              : "h-[200px] sm:h-[220px] w-full object-cover"
-          } rounded-t-lg transition-transform duration-300 hover:scale-105`}
-        />
-      )}
-
-      <div
-        className="rounded-b-lg backdrop-blur-md bg-white/20 dark:bg-white/10 border-t border-white/30 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/20 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-        style={{ WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)" }}
-      >
-        <div
-          className="px-4 sm:px-6 py-4 flex flex-col justify-between min-h-[180px]"
-          style={{
-            WebkitBackdropFilter: "blur(10px)",
-            backdropFilter: "blur(10px)",
-          }}
-        >
-          <h3 className="text-base sm:text-lg font-bold text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)]">
-            {project.title}
-          </h3>
-          <p className="text-xs sm:text-sm mt-2 text-white drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)] line-clamp-3">
-            {project.description}
-          </p>
-
-          <div className="flex flex-wrap gap-1 sm:gap-2 mt-3">
-            {project.technologies.map((tech, index) => (
-              <span
-                key={index}
-                className="px-2 py-1 text-[10px] sm:text-xs bg-gray-200 dark:bg-neutral-700 hover:bg-gray-400 rounded"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-
-          <div className="flex gap-2 sm:gap-4 mt-4">
-            <a
-              href={project.codeLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              <Github className="w-3 h-3 sm:w-4 sm:h-4" /> Code
-            </a>
-            <a
-              href={project.liveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 h-[32px] sm:h-[36px] rounded-lg text-[10px] sm:text-xs text-black dark:text-white bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 shadow-md hover:scale-105 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" /> Live Demo
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+// Utility for cleaner tailwind classes
+function cn(...inputs) {
+    return twMerge(clsx(inputs));
 }
 
-export default function Projects() {
-  const projects = [
-    {
-      image: "/Task-manager.png",
-      title: "Task Manager",
-      description:
-        "A full-stack task manager with built-in credit/debit tracking, authentication, and dynamic balance updates using Node.js and MongoDB.",
-      technologies: ["React.js", "TailwindCSS", "MongoDB", "Node.js"],
-      codeLink: "https://github.com/Anil-sai0418/Task-manager",
-      liveLink: "https://task-manager-anil.vercel.app/",
-    },
-    {
-      image: "/Typesprint.png",
-      title: "TypeSprint",
-      description:
-        "A typing speed test app with real-time feedback, leaderboards, and customizable themes built using Next.js and MongoDB.",
-      technologies: ["Next.js", "TailwindCSS", "MongoDB", "React"],
-      codeLink: "https://github.com/Anil-sai0418/Monkey-Type",
-      liveLink: "https://monkey-type-anil.vercel.app/",
-    },
-    {
-      image: "/NUtrify.png",
-      title: "Notes App",
-      description:
-        "A lightweight notes app that allows users to create, edit, and delete notes easily with a clean and responsive interface.",
-      technologies: ["React", "TailwindCSS","LocalStorage"],
-      codeLink: "https://github.com/Anil-sai0418/online-notes",
-      liveLink: "https://online-notes-five.vercel.app/",
-    },
-    {
-      image: "/Pyhononlinecomplier.png",
-      title: "Online Python Compiler",
-      description:
-        "An online Python compiler with a real-time editor and support for multiple Python versions using Next.js.",
-      technologies: ["Next.js", "TailwindCSS", "MongoDB", "React"],
-      codeLink: "https://github.com/Anil-sai0418/Online-Python-Compiler",
-      liveLink: "https://python-compiler-anil.vercel.app/",
-    },
-    {
-      image: "/Resume.webp",
-      title: "ATS Checker",
-      description:
-        "A resume optimization tool that analyzes resumes for ATS compatibility and provides keyword improvement tips.",
-      technologies: ["Next.js", "TailwindCSS", "MongoDB", "React"],
-      codeLink: "https://github.com/Anil-sai0418/ATS-Checker",
-      liveLink: "https://ats-checker-anil.vercel.app/",
-    },
-    {
-      image: "/Phone-book.png",
-      title: "Phone Book",
-      description:
-        "A contact management app with search, add, and delete features, designed with Apple's glass UI aesthetics.",
-      technologies: ["React", "Node.js", "MongoDB", "TailwindCSS"],
-      codeLink: "https://github.com/Anil-sai0418/Anil-s-phone-book",
-      liveLink: "https://anil-s-phone-book.vercel.app/",
-    },
-  ];
 
-  const cardRefs = projects.map(() => useRef(null));
-  const delays = [0, 0.15, 0.3, 0.45, 0.6, 0.75];
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const observers = [];
+// --- Mock Data ---
 
-    cardRefs.forEach((ref, idx) => {
-      if (!ref.current) return;
-      const observer = new window.IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("project-card-enter");
-              entry.target.classList.remove("opacity-0", "translate-y-8");
-              entry.target.style.animationDelay = `${delays[idx]}s`;
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.2 }
-      );
-      observer.observe(ref.current);
-      observers.push(observer);
+const PROJECTS = [
+    {
+        id: 1,
+        title: "Task Manager",
+        category: "Fintech Dashboard",
+        description: "A full‑stack task and transaction manager that tracks credits, debits, and balances per task with secure authentication and a clean, responsive dashboard.",
+        image: "/Task-manager.png",
+        tags: ["React", "Three.js", "WebSockets", "Tailwind"],
+        link: "https://task-manager-anil.vercel.app/",
+        github: "https://github.com/Anil-sai0418/Task-manager",
+        icon: <Zap className="w-6 h-6" />,
+    },
+    {
+        id: 2,
+        title: "TypeVex",
+        category: "Typing Platform",
+        description: "A modern typing practice platform focused on speed and accuracy, featuring real‑time statistics, contribution‑style activity tracking, and a smooth, distraction‑free UI.",
+        image: "/Typesprint.png",
+        tags: ["Next.js", "Solidity", "IPFS", "Node.js"],
+        link: "http://typevex.vercel.app/",
+        github: "https://github.com/Anil-sai0418/TypeSprint",
+        icon: <Layers className="w-6 h-6" />,
+    },
+    {
+        id: 3,
+        title: "Scrybyx Notes",
+        category: "AI Infrastructure",
+        description: "A smart note‑taking application designed for productivity, allowing users to create, organize, and manage notes with a fast, minimal, and intuitive interface.",
+        image: "/Scrybyx.png",
+        tags: ["Python", "Kubernetes", "React", "GraphQL"],
+        link: "https://scribyx-notes.vercel.app/",
+        github: "https://github.com/Anil-sai0418/online-notes",
+        icon: <Cpu className="w-6 h-6" />,
+    },
+    {
+        id: 4,
+        title: "Voxvera",
+        category: "Notes Application",
+        description: "A sleek and lightweight notes application built for everyday use, offering structured note organization, quick access, and a visually clean user experience.",
+        image: "/Voxvera.png",
+        tags: ["TypeScript", "Storybook", "Radix UI", "Vite"],
+        link: "https://voxvera.vercel.app/",
+        github: "https://github.com/Anil-sai0418/VoxVera",
+        icon: <Box className="w-6 h-6" />,
+    },
+    {
+        id: 5,
+        title: "Phone Book",
+        category: "Security Suite",
+        description: "A secure phone book application to store and manage contacts with essential details like name, phone number, and email, built with simplicity and reliability in mind.",
+        image: "/Phone-book.png",
+        tags: ["Go", "Rust", "PostgreSQL", "Redis"],
+        link: "https://anil-s-phone-book.vercel.app/",
+        github: "https://github.com/Anil-sai0418/Anil-s-phone-book",
+        icon: <Code2 className="w-6 h-6" />,
+    },
+    {
+        id: 6,
+        title: "Ethereal Flow",
+        category: "Creative Tool",
+        description: "Browser-based 3D modeling tool for architects and game designers with real-time collaboration.",
+        image: "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=2670&auto=format&fit=crop",
+        tags: ["WebAssembly", "C++", "WebGL", "Firebase"],
+        link: "#",
+        github: "https://github.com/username/ethereal-flow",
+        icon: <ExternalLink className="w-6 h-6" />,
+    },
+];
+
+// --- Components ---
+
+const MagneticButton = ({ children, className }) => {
+    const ref = useRef(null);
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+
+    const handleMouseMove = (e) => {
+        if (!ref.current) return;
+        const { clientX, clientY } = e;
+        const { left, top, width, height } = ref.current.getBoundingClientRect();
+        const centerX = left + width / 2;
+        const centerY = top + height / 2;
+        x.set((clientX - centerX) * 0.3);
+        y.set((clientY - centerY) * 0.3);
+    };
+
+    const handleMouseLeave = () => {
+        x.set(0);
+        y.set(0);
+    };
+
+    return (
+        <motion.button
+            ref={ref}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ x, y }}
+            className={cn(
+                "relative overflow-hidden group rounded-full px-8 py-4 font-medium transition-colors",
+                className
+            )}
+        >
+            <div className="absolute inset-0 bg-white/10 group-hover:bg-white/20 transition-colors duration-300" />
+            <div className="relative flex items-center gap-2">
+                {children}
+            </div>
+        </motion.button>
+    );
+};
+
+const ProjectCard = ({ project, index }) => {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="flex-shrink-0 w-[85vw] md:w-[600px] lg:w-[700px] h-[70vh] md:h-[600px] relative group rounded-3xl overflow-hidden bg-[#111] border border-white/5 shadow-2xl"
+        >
+            {/* Background Image with Zoom Effect */}
+            <div className="absolute inset-0 overflow-hidden">
+                <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="w-full h-full"
+                >
+                    <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"
+                    />
+                </motion.div>
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent" />
+            </div>
+
+            {/* Content */}
+            <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end">
+                <div className="mb-4">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-white/80 mb-4">
+                        {project.icon}
+                        {project.category}
+                    </span>
+                </div>
+
+                <h3 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight leading-tight">
+                    {project.title}
+                </h3>
+
+                <p className="text-white/60 text-lg mb-8 max-w-md leading-relaxed">
+                    {project.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-8">
+                    {project.tags.map((tag) => (
+                        <span
+                            key={tag}
+                            className="px-3 py-1 rounded-full border border-white/10 bg-black/20 text-xs text-white/70 backdrop-blur-sm"
+                        >
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+
+                <div className="flex items-center gap-4">
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-4 rounded-full border border-white/10 text-white hover:bg-white/10 transition-colors"
+                    >
+                      <Link className="w-5 h-5" />
+                    </a>
+
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-4 rounded-full border border-white/10 text-white hover:bg-white/10 transition-colors"
+                    >
+                      <Github className="w-5 h-5" />
+                    </a>
+                </div>
+            </div>
+
+            {/* Index Number */}
+            <div className="absolute top-8 right-8 text-8xl font-bold text-white/5 select-none pointer-events-none">
+                0{index + 1}
+            </div>
+        </motion.div>
+    );
+};
+
+const CursorGradient = () => {
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    // Smooth out the movement
+    const smoothX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+    const smoothY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            mouseX.set(e.clientX);
+            mouseY.set(e.clientY);
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, [mouseX, mouseY]);
+
+    const background = useMotionTemplate`radial-gradient(600px circle at ${smoothX}px ${smoothY}px, rgba(255,255,255,0.06), transparent 40%)`;
+
+    return (
+        <motion.div
+            className="pointer-events-none fixed inset-0 z-0"
+            style={{ background }}
+        />
+    );
+};
+
+export default function ProjectShowcase() {
+    const containerRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"],
     });
 
-    return () => observers.forEach((observer) => observer.disconnect());
-  }, []);
+    // Map scroll progress to horizontal translation
+    // We have 6 cards. Each card is roughly 700px + gap.
+    // Total width needed: 6 * 700 + 5 * 32 (gap) = 4200 + 160 = 4360px
+    // Viewport width: 100vw
+    // Total scroll distance needed: 4360px - 100vw
 
-  return (
-    <div className="animate-pageEnter">
-      <div id="projects" className="relative flex flex-col items-center py-8 sm:py-12 bg-white dark:bg-black">
-        <style>{styles}</style>
+    // Using a simpler approach for responsiveness: 
+    // We calculate the translation based on the total scroll width vs viewport width.
+    // However, for a fixed layout, we can approximate.
 
-        {/* Header */}
-        <div className="relative flex flex-col items-center text-center z-10 px-4 pt-12 sm:pt-20">
-          <p className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold hover:scale-105 transition">
-            Projects
-          </p>
-          <p className="text-gray-300 text-xs sm:text-sm mt-2 font-bold hover:scale-105 transition max-w-md">
-            Showcasing my passion for innovation through creative and impactful projects
-          </p>
+    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+
+    return (
+        <div className="bg-[#050505] min-h-screen text-white selection:bg-white/20 font-sans">
+            <CursorGradient />
+
+            {/* Hero Section */}
+            <section className="h-screen flex flex-col justify-center items-center relative px-6">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-20" />
+
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                    className="text-center z-10 max-w-4xl"
+                >
+                    <h1 className="text-6xl md:text-8xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50">
+                        Selected Works
+                    </h1>
+                    <p className="text-xl md:text-2xl text-white/40 font-light max-w-2xl mx-auto leading-relaxed">
+                        Real-world apps built with clean design, strong performance, and practical functionality.
+                    </p>
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1, duration: 1 }}
+                    className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                >
+                    <span className="text-xs uppercase tracking-widest text-white/30">Scroll to Explore</span>
+                    <div className="w-[1px] h-16 bg-gradient-to-b from-white/30 to-transparent" />
+                </motion.div>
+            </section>
+
+            {/* Horizontal Scroll Section */}
+            <div ref={containerRef} className="relative h-[300vh]">
+                <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+                    <motion.div
+                        style={{ x }}
+                        className="flex gap-8 px-8 md:px-16 lg:px-24"
+                    >
+                        {PROJECTS.map((project, index) => (
+                            <ProjectCard key={project.id} project={project} index={index} />
+                        ))}
+
+                        {/* End Card */}
+                        <div className="flex-shrink-0 w-[50vw] md:w-[400px] h-[70vh] md:h-[600px] flex items-center justify-center">
+                            <div className="text-center">
+                                <h3 className="text-3xl font-bold mb-4">Want to see more?</h3>
+                                <MagneticButton className="bg-white text-black">
+                                    View All Projects
+                                </MagneticButton>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+            </div>
+
+
         </div>
-
-        {/* Background Grid */}
-        <div
-          className={cn(
-            "absolute inset-0",
-            "[background-size:20px_20px] sm:[background-size:30px_30px] lg:[background-size:40px_40px]",
-            "[background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)]",
-            "dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]"
-          )}
-          style={{ animation: "moveBackground 10s linear infinite" }}
-        />
-        <div className="pointer-events-none absolute top-0 left-0 right-0 h-[400px] sm:h-[500px] lg:h-[600px] bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black z-0" />
-
-        {/* Project Cards */}
-        <div className="mt-8 sm:mt-12 lg:mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-[90%] sm:w-[85%] lg:w-[80%] max-w-6xl px-2">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} cardRef={cardRefs[index]} />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+    );
 }

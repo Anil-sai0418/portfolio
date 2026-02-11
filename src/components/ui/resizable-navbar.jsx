@@ -200,13 +200,21 @@ export const NavbarLogo = () => {
   return (
     <a
       href="#home"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-lg font-normal text-black">
-      <img
-        src="https://assets.aceternity.com/logo-dark.png"
-        alt="logo"
-        width={30}
-        height={30} />
-      <span className="font-medium text-white  dark:text-white">ANILSAI</span>
+      className="relative z-20 ml-4 mr-4 flex items-center space-x-2 px-2 py-1 text-lg font-normal text-black">
+      <div className="relative flex flex-col items-start leading-none">
+        <h1
+          className="text-2xl md:text-3xl text-white"
+          style={{ fontFamily: '"Mrs Saint Delafield", cursive' }}
+        >
+          Anil
+        </h1>
+        <div
+          className="text-[8px] md:text-[9px] font-light tracking-[0.6em] text-white uppercase -mt-1 ml-1"
+          style={{ fontFamily: "system-ui, sans-serif" }}
+        >
+          SAI
+        </div>
+      </div>
     </a>
   );
 };
