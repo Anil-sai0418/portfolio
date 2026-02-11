@@ -151,7 +151,7 @@ const ProjectCard = ({ project, index }) => {
             </div>
 
             {/* Content */}
-            <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end">
+            <div className="absolute inset-0 p-6 md:p-12 flex flex-col justify-end">
                 <div className="mb-4">
                     <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-white/80 mb-4">
                         {project.icon}
@@ -159,12 +159,15 @@ const ProjectCard = ({ project, index }) => {
                     </span>
                 </div>
 
-                <h3 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight leading-tight">
+                <h3 className="text-3xl md:text-5xl font-bold text-white mb-2 md:mb-4 tracking-tight leading-tight">
                     {project.title}
                 </h3>
 
-                <p className="text-white/60 text-lg mb-8 max-w-md leading-relaxed">
+                <p className="text-white/60 text-base md:text-lg mb-6 md:mb-8 max-w-md leading-relaxed hidden sm:block">
                     {project.description}
+                </p>
+                <p className="text-white/60 text-sm mb-6 max-w-md leading-relaxed block sm:hidden">
+                    {project.description.substring(0, 100)}...
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-8">
@@ -291,7 +294,7 @@ export default function ProjectShowcase() {
                 <div className="sticky top-0 h-screen flex items-center overflow-hidden">
                     <motion.div
                         style={{ x }}
-                        className="flex gap-8 px-8 md:px-16 lg:px-24"
+                        className="flex gap-4 sm:gap-8 px-4 sm:px-16 lg:px-24"
                     >
                         {PROJECTS.map((project, index) => (
                             <ProjectCard key={project.id} project={project} index={index} />

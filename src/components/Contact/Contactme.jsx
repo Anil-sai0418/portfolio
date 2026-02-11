@@ -221,7 +221,7 @@ export default function ContactMe() {
         </main>
 
         {/* Enhanced Footer */}
-          <ScrollReveal delay={0.8}>
+        <ScrollReveal delay={0.8}>
           <footer className="flex flex-col items-center justify-center py-6 text-gray-300 bg-transparent relative z-10 text-center mx-auto">
             <div className="flex flex-col items-center justify-center gap-4 text-center w-full">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-200 hover:text-white transition-colors duration-300">

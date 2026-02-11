@@ -59,7 +59,7 @@ export default function Skills() {
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
 
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-12 relative z-10 flex flex-col items-center">
 
         {/* Header */}
         <motion.div
@@ -104,7 +104,7 @@ export default function Skills() {
 
 
         {/* Skills Grid */}
-        <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 w-full max-w-6xl">
+        <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 w-full max-w-6xl px-2 sm:px-0">
           <AnimatePresence mode='popLayout'>
             {filteredSkills.map((skill, index) => (
               <StaggerItem

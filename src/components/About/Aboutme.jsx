@@ -8,7 +8,7 @@ const AboutMe = () => {
       {/* Background Noise/Texture */}
       <div className="fixed inset-0 opacity-[0.03]   pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
-      <main className="max-w-7xl mx-auto px-6 py-24  relative z-10 w-full">
+      <main className="max-w-7xl mx-auto px-4 sm:px-8 md:px-12 py-16 md:py-24 relative z-10 w-full">
         {/* Header Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 items-center mb-10">
           <div>

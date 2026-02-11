@@ -162,7 +162,7 @@ export default function CrystalSphereBackground() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.1, 0.25, 1.0] }}
-              className="text-7xl md:text-9xl font-black tracking-tighter mb-8 text-white mix-blend-overlay opacity-90"
+              className="text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter mb-6 md:mb-8 text-white mix-blend-overlay opacity-90"
             >
               FULL STACK<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">ENGINEER.</span>
@@ -172,7 +172,7 @@ export default function CrystalSphereBackground() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.9, ease: [0.25, 0.1, 0.25, 1.0] }}
-              className="text-xl md:text-2xl text-white/70 leading-relaxed font-light max-w-2xl bg-black/20 backdrop-blur-sm p-6 rounded-2xl border border-white/5 inline-block"
+              className="text-lg sm:text-xl md:text-2xl text-white/70 leading-relaxed font-light max-w-2xl bg-black/20 backdrop-blur-sm p-4 md:p-6 rounded-2xl border border-white/5 inline-block"
             >
               Solving complex problems with a modern tech stack. I focus on <span className="text-white font-medium">performance</span>, <span className="text-white font-medium">scalability</span>, and <span className="text-white font-medium">premium user experience</span>.
             </motion.p>
