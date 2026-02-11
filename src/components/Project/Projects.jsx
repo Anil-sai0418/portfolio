@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, useMotionTemplate } from 'framer-motion';
-import { ArrowRight, ExternalLink, Github, Layers, Zap, Code2, Box, Cpu, Link } from 'lucide-react';
+import { ArrowRight, ExternalLink, Github, Layers, Zap, Code2, Box, Cpu, Link, Notebook, Languages, Contact, IndianRupee, Phone, ClipboardPenLine, CaseSensitive, SquareArrowDownLeftIcon, SquareArrowOutUpLeft, SquareArrowOutUpRight } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -20,10 +20,10 @@ const PROJECTS = [
         category: "Fintech Dashboard",
         description: "A full‑stack task and transaction manager that tracks credits, debits, and balances per task with secure authentication and a clean, responsive dashboard.",
         image: "/Task-manager.png",
-        tags: ["React", "Three.js", "WebSockets", "Tailwind"],
+        tags: ["React.js", "seo-optimized", "WebSockets", "Graph.js"],
         link: "https://task-manager-anil.vercel.app/",
         github: "https://github.com/Anil-sai0418/Task-manager",
-        icon: <Zap className="w-6 h-6" />,
+        icon: <IndianRupee className="w-6 h-6" />,
     },
     {
         id: 2,
@@ -31,10 +31,10 @@ const PROJECTS = [
         category: "Typing Platform",
         description: "A modern typing practice platform focused on speed and accuracy, featuring real‑time statistics, contribution‑style activity tracking, and a smooth, distraction‑free UI.",
         image: "/Typesprint.png",
-        tags: ["Next.js", "Solidity", "IPFS", "Node.js"],
+        tags: ["React.js", "Express", "O-Auth", "Graph.js"],
         link: "http://typevex.vercel.app/",
         github: "https://github.com/Anil-sai0418/TypeSprint",
-        icon: <Layers className="w-6 h-6" />,
+        icon: <CaseSensitive className="w-6 h-6" />,
     },
     {
         id: 3,
@@ -42,10 +42,10 @@ const PROJECTS = [
         category: "AI Infrastructure",
         description: "A smart note‑taking application designed for productivity, allowing users to create, organize, and manage notes with a fast, minimal, and intuitive interface.",
         image: "/Scrybyx.png",
-        tags: ["Python", "Kubernetes", "React", "GraphQL"],
+        tags: ["React.js", "tailwindcss", "Three.js","localstorage" ],
         link: "https://scribyx-notes.vercel.app/",
         github: "https://github.com/Anil-sai0418/online-notes",
-        icon: <Cpu className="w-6 h-6" />,
+        icon: <ClipboardPenLine className="w-6 h-6" />,
     },
     {
         id: 4,
@@ -53,10 +53,10 @@ const PROJECTS = [
         category: "Notes Application",
         description: "A sleek and lightweight notes application built for everyday use, offering structured note organization, quick access, and a visually clean user experience.",
         image: "/Voxvera.png",
-        tags: ["TypeScript", "Storybook", "Radix UI", "Vite"],
+        tags: ["React.js", "GT-api", "Seo-optimized", "multi-language support"],
         link: "https://voxvera.vercel.app/",
         github: "https://github.com/Anil-sai0418/VoxVera",
-        icon: <Box className="w-6 h-6" />,
+        icon: <Languages className="w-6 h-6" />,
     },
     {
         id: 5,
@@ -64,10 +64,10 @@ const PROJECTS = [
         category: "Security Suite",
         description: "A secure phone book application to store and manage contacts with essential details like name, phone number, and email, built with simplicity and reliability in mind.",
         image: "/Phone-book.png",
-        tags: ["Go", "Rust", "PostgreSQL", "Redis"],
+        tags: ["React.js", "Node.js", "MongoDB", "GlassUI"],
         link: "https://anil-s-phone-book.vercel.app/",
         github: "https://github.com/Anil-sai0418/Anil-s-phone-book",
-        icon: <Code2 className="w-6 h-6" />,
+        icon: <Phone className="w-6 h-6" />,
     },
     {
         id: 6,
@@ -186,18 +186,24 @@ const ProjectCard = ({ project, index }) => {
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-4 rounded-full border border-white/10 text-white hover:bg-white/10 transition-colors"
+                        className="group relative inline-flex items-center justify-center px-6 py-3 pr-10 rounded-full border border-white/20 bg-transparent text-white text-sm font-medium overflow-hidden transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
                     >
-                        <Link className="w-5 h-5" />
+                        <span className="transition-all duration-300 group-hover:-translate-x-1">
+                            Live Project
+                        </span>
+                        <SquareArrowOutUpRight className="absolute right-4 w-4 h-4 opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
                     </a>
 
                     <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-4 rounded-full border border-white/10 text-white hover:bg-white/10 transition-colors"
+                        className="group relative inline-flex items-center justify-center px-6 py-3 pr-10 rounded-full border border-white/20 bg-transparent text-white text-sm font-medium overflow-hidden transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
                     >
-                        <Github className="w-5 h-5" />
+                        <span className="transition-all duration-300 group-hover:-translate-x-1">
+                            GitHub Repo
+                        </span>
+                        <Github className="absolute right-4 w-4 h-4 opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
                     </a>
                 </div>
             </div>

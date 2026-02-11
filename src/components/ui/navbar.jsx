@@ -45,20 +45,20 @@ export function NavbarDemo({ children }) {
         {/* Desktop Navigation */}
         <NavBody className="hidden lg:flex">
           <NavbarLogo />
-          <NavItems items={navItems} />
+          <NavItems
+            items={navItems}
+            className="[&>a]:px-5 [&>a]:py-2 [&>a]:rounded-full [&>a]:transition-all [&>a]:duration-300 [&>a]:border [&>a]:border-transparent [&>a:hover]:bg-white/10 [&>a:hover]:backdrop-blur-md [&>a:hover]:border-white/30 [&>a:hover]:shadow-[0_4px_20px_rgba(255,255,255,0.15)]"
+          />
           <div className="flex items-center z-10 gap-4 font-bold">
             <NavbarButton
+              as="a"
+              href="https://drive.google.com/file/d/1Trvw2-85O7SUmUdjQX0Fg7hY2MRoJDMh/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               variant="primary"
-              className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg px-6 py-3 text-white font-semibold shadow-lg transition-all duration-300 hover:bg-white/30 hover:border-white/50"
+              className="relative px-8 py-3 rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/30 text-white font-semibold shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-white/20 hover:border-white/50 hover:shadow-[0_8px_40px_rgba(255,255,255,0.2)] active:scale-95"
             >
-              <a
-                href="https://drive.google.com/file/d/1Trvw2-85O7SUmUdjQX0Fg7hY2MRoJDMh/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full text-center"
-              >
-                Resume
-              </a>
+              Resume
             </NavbarButton>
           </div>
         </NavBody>
@@ -92,11 +92,11 @@ export function NavbarDemo({ children }) {
                   <DrawerFooter className="flex">
                     <NavbarButton
                       as="a"
-                      href=" https://drive.google.com/file/d/1Trvw2-85O7SUmUdjQX0Fg7hY2MRoJDMh/view?usp=sharing"
+                      href="https://drive.google.com/file/d/1Trvw2-85O7SUmUdjQX0Fg7hY2MRoJDMh/view?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
                       variant="primary"
-                      className="w-full bg-gradient-to-r from-blue-500/30 to-cyan-500/30 backdrop-blur-md border border-white/30 rounded-lg px-6 py-3 text-white font-semibold shadow-lg transition-all duration-300 hover:from-blue-500/50 hover:to-cyan-500/50 hover:border-white/50"
+                      className="w-full relative px-8 py-3 rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/30 text-white font-semibold shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-white/20 hover:border-white/50 hover:shadow-[0_8px_40px_rgba(255,255,255,0.2)] active:scale-95"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Resume
