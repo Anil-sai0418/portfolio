@@ -47,7 +47,6 @@ export function NavbarDemo({ children }) {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center z-10 gap-4 font-bold">
-            {/* <ModeToggle /> */}
             <NavbarButton
               variant="primary"
               className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg px-6 py-3 text-white font-semibold shadow-lg transition-all duration-300 hover:bg-white/30 hover:border-white/50"
