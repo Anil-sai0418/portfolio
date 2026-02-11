@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
 
 const skills = [
   { name: "HTML", src: "/html.webp", category: "frontend" },
@@ -16,12 +16,40 @@ const skills = [
   { name: "MySQL", src: "/mysql.png", category: "backend" },
 ];
 
+const CursorGradient = () => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth out the movement
+  const smoothX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const smoothY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  const background = useMotionTemplate`radial-gradient(600px circle at ${smoothX}px ${smoothY}px, rgba(255,255,255,0.06), transparent 40%)`;
+
+  return (
+    <motion.div
+      className="pointer-events-none fixed inset-0 z-0"
+      style={{ background }}
+    />
+  );
+};
+
 export default function Skills() {
   const [filter, setFilter] = useState("all");
   const filteredSkills = filter === "all" ? skills : skills.filter(skill => skill.category === filter);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white overflow-hidden relative py-20">
+    <div id="skills" className="min-h-screen bg-[#050505] text-white overflow-hidden relative py-20">
+      <CursorGradient />
       {/* Background Noise/Texture */}
       <div className="fixed inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 

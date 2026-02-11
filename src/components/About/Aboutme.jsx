@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const AboutMe = () => {
   return (
-    <div className="min-h-screen  bg-[#050505]  text-white selection:bg-white/10 flex items-center">
+    <div id="about" className="min-h-screen  bg-[#050505]  text-white selection:bg-white/10 flex items-center">
       {/* Background Noise/Texture */}
       <div className="fixed inset-0 opacity-[0.03]   pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 

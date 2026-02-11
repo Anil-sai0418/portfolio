@@ -7,7 +7,6 @@ import Contactme from './components/Contact/Contactme.jsx';
 import { NavbarDemo } from './components/ui/navbar';
 import SplashCursor from './components/ui/SplahCurosr';
 import React, { useEffect, useState } from 'react';
-import CrystalSphereBackground from './components/About/Aboutme.jsx';
 
 function App() {
   const [showPopup, setShowPopup] = useState(false);
@@ -122,7 +121,7 @@ function App() {
             {windowWidth >= 1024 && <SplashCursor />}
             <NavbarDemo>
               <Home />
-              <CrystalSphereBackground />
+              <Aboutme />
               <Skills />
               <Projects />
               <Contactme />

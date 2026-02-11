@@ -137,7 +137,7 @@ export default function CrystalSphereBackground() {
   }, []);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black">
+    <div id="home" className="relative w-full h-screen overflow-hidden bg-black">
       {/* Three.js Canvas Background */}
       <canvas
         ref={canvasRef}

@@ -179,21 +179,21 @@ const ProjectCard = ({ project, index }) => {
 
                 <div className="flex items-center gap-4">
                     <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-4 rounded-full border border-white/10 text-white hover:bg-white/10 transition-colors"
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-4 rounded-full border border-white/10 text-white hover:bg-white/10 transition-colors"
                     >
-                      <Link className="w-5 h-5" />
+                        <Link className="w-5 h-5" />
                     </a>
 
                     <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-4 rounded-full border border-white/10 text-white hover:bg-white/10 transition-colors"
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-4 rounded-full border border-white/10 text-white hover:bg-white/10 transition-colors"
                     >
-                      <Github className="w-5 h-5" />
+                        <Github className="w-5 h-5" />
                     </a>
                 </div>
             </div>
@@ -253,7 +253,7 @@ export default function ProjectShowcase() {
     const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
 
     return (
-        <div className="bg-[#050505] min-h-screen text-white selection:bg-white/20 font-sans">
+        <div id="projects" className="bg-[#050505] min-h-screen text-white selection:bg-white/20 font-sans">
             <CursorGradient />
 
             {/* Hero Section */}
