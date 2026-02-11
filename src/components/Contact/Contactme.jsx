@@ -121,7 +121,7 @@ export default function ContactMe() {
       />
 
       {/* Main content with enhanced animations */}
-      <section className="relative z-20 py-8 w-full max-w-4xl">
+      <section className="relative z-20 py-8 w-full max-w-4xl mx-auto text-center flex flex-col items-center">
         <main className="relative z-10 px-4 sm:px-8 md:px-12 py-16 flex flex-col items-center">
 
           <ScrollReveal>
@@ -144,50 +144,91 @@ export default function ContactMe() {
             </p>
           </ScrollReveal>
 
-          {/* Enhanced Social buttons with premium hover effects */}
-          <div className="flex flex-wrap justify-center gap-4 w-full">
-            {socials.map((social, i) => (
-              <ScrollReveal key={i} delay={0.3 + (i * 0.1)}>
-                <a
-                  href={social.href}
-                  className={cn(
-                    "relative flex items-center justify-center space-x-3 bg-white/5 hover:bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl w-44 px-6 py-4 text-white text-base transition-all duration-500 shadow-xl hover:shadow-2xl overflow-hidden group",
-                    "before:absolute before:inset-0 before:bg-gradient-to-r before:opacity-0 before:transition-opacity before:duration-500 hover:before:opacity-100 before:blur-xl",
-                    `before:${social.color}`
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <motion.span
-                    className="relative z-10 text-lg"
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                  >
-                    {social.icon}
-                  </motion.span>
-                  <span className="relative z-10 font-semibold text-sm group-hover:text-white transition-colors duration-300">
-                    {social.label}
-                  </span>
+          {/* Social buttons arranged in 3 + 2 layout */}
+          <div className="flex flex-col items-center gap-6 w-full">
 
-                  {/* Hover glow effect */}
-                  <div className={cn(
-                    "absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-to-r blur-md",
-                    social.color
-                  )} />
-                </a>
-              </ScrollReveal>
-            ))}
+            {/* First Row - 3 Items */}
+            <div className="flex flex-wrap justify-center gap-4 w-full">
+              {socials.slice(0, 3).map((social, i) => (
+                <ScrollReveal key={i} delay={0.3 + (i * 0.1)}>
+                  <a
+                    href={social.href}
+                    className={cn(
+                      "relative flex items-center justify-center space-x-3 bg-white/5 hover:bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl w-44 px-6 py-4 text-white text-base transition-all duration-500 shadow-xl hover:shadow-2xl overflow-hidden group",
+                      "before:absolute before:inset-0 before:bg-gradient-to-r before:opacity-0 before:transition-opacity before:duration-500 hover:before:opacity-100 before:blur-xl",
+                      `before:${social.color}`
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <motion.span
+                      className="relative z-10 text-lg"
+                      whileHover={{ scale: 1.2, rotate: 5 }}
+                    >
+                      {social.icon}
+                    </motion.span>
+                    <span className="relative z-10 font-semibold text-sm group-hover:text-white transition-colors duration-300">
+                      {social.label}
+                    </span>
+
+                    <div
+                      className={cn(
+                        "absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-to-r blur-md",
+                        social.color
+                      )}
+                    />
+                  </a>
+                </ScrollReveal>
+              ))}
+            </div>
+
+            {/* Second Row - 2 Items (Centered) */}
+            <div className="flex justify-center gap-4 w-full">
+              {socials.slice(3).map((social, i) => (
+                <ScrollReveal key={i + 3} delay={0.6 + (i * 0.1)}>
+                  <a
+                    href={social.href}
+                    className={cn(
+                      "relative flex items-center justify-center space-x-3 bg-white/5 hover:bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl w-44 px-6 py-4 text-white text-base transition-all duration-500 shadow-xl hover:shadow-2xl overflow-hidden group",
+                      "before:absolute before:inset-0 before:bg-gradient-to-r before:opacity-0 before:transition-opacity before:duration-500 hover:before:opacity-100 before:blur-xl",
+                      `before:${social.color}`
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <motion.span
+                      className="relative z-10 text-lg"
+                      whileHover={{ scale: 1.2, rotate: 5 }}
+                    >
+                      {social.icon}
+                    </motion.span>
+                    <span className="relative z-10 font-semibold text-sm group-hover:text-white transition-colors duration-300">
+                      {social.label}
+                    </span>
+
+                    <div
+                      className={cn(
+                        "absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-to-r blur-md",
+                        social.color
+                      )}
+                    />
+                  </a>
+                </ScrollReveal>
+              ))}
+            </div>
+
           </div>
         </main>
 
         {/* Enhanced Footer */}
-        <ScrollReveal delay={0.8} fullWidth>
-          <footer className="w-full text-center py-6 text-gray-300 bg-transparent relative z-10">
-            <div className="flex flex-col items-center gap-4">
+          <ScrollReveal delay={0.8}>
+          <footer className="flex flex-col items-center justify-center py-6 text-gray-300 bg-transparent relative z-10 text-center mx-auto">
+            <div className="flex flex-col items-center justify-center gap-4 text-center w-full">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-200 hover:text-white transition-colors duration-300">
                 Anil Sai Nunna | Full Stack Developer
               </h2>
               <a
-                href="https://drive.google.com/file/d/14dlEcs0cFSRz4Whe894sln9ectveLXgf/view?usp=sharing"
+                href="https://drive.google.com/file/d/1Trvw2-85O7SUmUdjQX0Fg7hY2MRoJDMh/view?usp=sharing"
                 className="group inline-block bg-gradient-to-r from-green-400/20 to-blue-500/20 hover:from-green-400/30 hover:to-blue-500/30 border border-white/30 backdrop-blur-xl rounded-xl px-6 py-3 text-white text-sm font-semibold transition-all duration-500 shadow-lg hover:shadow-xl hover:scale-105 relative overflow-hidden"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -197,7 +238,9 @@ export default function ContactMe() {
               </a>
               <p className="text-sm text-gray-400 font-medium text-center">
                 <span className="block sm:inline">Designed by Anil</span>{' '}
-                <span className="block sm:inline">© 2025 All rights reserved.</span>
+                <span className="block sm:inline">
+                  © {new Date().getFullYear()} All rights reserved.
+                </span>
               </p>
             </div>
           </footer>
