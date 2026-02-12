@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
 import StaggerContainer, { StaggerItem } from '../ui/StaggerContainer';
 
@@ -46,7 +46,49 @@ const CursorGradient = () => {
 
 export default function Skills() {
   const [filter, setFilter] = useState("all");
+  const [dominantColors, setDominantColors] = useState({});
+
   const filteredSkills = filter === "all" ? skills : skills.filter(skill => skill.category === filter);
+
+  useEffect(() => {
+    const extractColor = (src, name) => {
+      const img = new Image();
+      img.crossOrigin = "Anonymous";
+      img.src = src;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+
+        const data = ctx.getImageData(0, 0, img.width, img.height).data;
+        let r = 0, g = 0, b = 0, count = 0;
+
+        for (let i = 0; i < data.length; i += 40) {
+          r += data[i];
+          g += data[i + 1];
+          b += data[i + 2];
+          count++;
+        }
+
+        r = Math.floor(r / count);
+        g = Math.floor(g / count);
+        b = Math.floor(b / count);
+
+        setDominantColors(prev => ({
+          ...prev,
+          [name]: `rgb(${r}, ${g}, ${b})`
+        }));
+      };
+    };
+
+    skills.forEach(skill => {
+      if (!dominantColors[skill.name]) {
+        extractColor(skill.src, skill.name);
+      }
+    });
+  }, []);
 
   return (
     <div id="skills" className="min-h-screen bg-[#050505] text-white overflow-hidden relative py-20">
@@ -109,15 +151,22 @@ export default function Skills() {
             {filteredSkills.map((skill, index) => (
               <StaggerItem
                 key={skill.name}
-                className="group relative flex flex-col items-center justify-center p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm hover:bg-white/10 hover:border-white/20 transition-colors duration-300 aspect-square"
+                className="group relative flex flex-col items-center justify-center p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm transition-all duration-500 aspect-square overflow-hidden"
               >
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: dominantColors[skill.name]
+                      ? `radial-gradient(300px circle at center, ${dominantColors[skill.name]}, transparent 70%)`
+                      : "transparent",
+                    filter: "blur(60px)",
+                    transform: "scale(1.2)"
+                  }}
+                />
                 <motion.div
                   whileHover={{ y: -5, scale: 1.05 }}
                   className="contents"
                 >
-                  {/* Glow Effect on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
-
                   <div className="relative z-10 p-3 bg-[#0a0a0a] rounded-xl border border-white/10 shadow-lg mb-3 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-shadow duration-300">
                     <img src={skill.src} alt={skill.name} className="w-10 h-10 object-contain" />
                   </div>
