@@ -3,18 +3,18 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate }
 import StaggerContainer, { StaggerItem } from '../ui/StaggerContainer';
 
 const skills = [
-  { name: "HTML", src: "/html.webp", category: "frontend" },
-  { name: "CSS", src: "/css.webp", category: "frontend" },
-  { name: "Tailwind", src: "/tailwind.webp", category: "frontend" },
-  { name: "JavaScript", src: "/js.webp", category: "frontend" },
-  { name: "TypeScript", src: "/TS.webp", category: "frontend" },
-  { name: "React", src: "/react.webp", category: "frontend" },
-  { name: "Next.js", src: "/next.png", category: "frontend" },
-  { name: "Node.js", src: "/node.webp", category: "backend" },
-  { name: "Express.js", src: "/express.webp", category: "backend" },
-  { name: "MongoDB", src: "/mongodb.webp", category: "backend" },
-  { name: "Python", src: "/python.webp", category: "backend" },
-  { name: "MySQL", src: "/mysql.png", category: "backend" },
+  { name: "HTML", src: "/html.webp", category: "frontend", color: "rgb(227, 76, 38)" },
+  { name: "CSS", src: "/css.webp", category: "frontend", color: "rgb(38, 77, 228)" },
+  { name: "Tailwind", src: "/tailwind.webp", category: "frontend", color: "rgb(56, 189, 248)" },
+  { name: "JavaScript", src: "/js.webp", category: "frontend", color: "rgb(247, 223, 30)" },
+  { name: "TypeScript", src: "/TS.webp", category: "frontend", color: "rgb(49, 120, 198)" },
+  { name: "React", src: "/react.webp", category: "frontend", color: "rgb(97, 218, 251)" },
+  { name: "Next.js", src: "/next.png", category: "frontend", color: "rgb(255, 255, 255)" },
+  { name: "Node.js", src: "/node.webp", category: "backend", color: "rgb(83, 158, 67)" },
+  { name: "Express.js", src: "/express.webp", category: "backend", color: "rgb(255, 255, 255)" }, // keeping white/light for dark mode visibility
+  { name: "MongoDB", src: "/mongodb.webp", category: "backend", color: "rgb(71, 162, 72)" },
+  { name: "Python", src: "/python.webp", category: "backend", color: "rgb(55, 118, 171)" },
+  { name: "MySQL", src: "/mysql.png", category: "backend", color: "rgb(0, 117, 143)" },
 ];
 
 const CursorGradient = () => {
@@ -46,49 +46,8 @@ const CursorGradient = () => {
 
 export default function Skills() {
   const [filter, setFilter] = useState("all");
-  const [dominantColors, setDominantColors] = useState({});
 
   const filteredSkills = filter === "all" ? skills : skills.filter(skill => skill.category === filter);
-
-  useEffect(() => {
-    const extractColor = (src, name) => {
-      const img = new Image();
-      img.crossOrigin = "Anonymous";
-      img.src = src;
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0, img.width, img.height);
-
-        const data = ctx.getImageData(0, 0, img.width, img.height).data;
-        let r = 0, g = 0, b = 0, count = 0;
-
-        for (let i = 0; i < data.length; i += 40) {
-          r += data[i];
-          g += data[i + 1];
-          b += data[i + 2];
-          count++;
-        }
-
-        r = Math.floor(r / count);
-        g = Math.floor(g / count);
-        b = Math.floor(b / count);
-
-        setDominantColors(prev => ({
-          ...prev,
-          [name]: `rgb(${r}, ${g}, ${b})`
-        }));
-      };
-    };
-
-    skills.forEach(skill => {
-      if (!dominantColors[skill.name]) {
-        extractColor(skill.src, skill.name);
-      }
-    });
-  }, []);
 
   return (
     <div id="skills" className="min-h-screen bg-[#050505] text-white overflow-hidden relative py-20">
@@ -156,9 +115,7 @@ export default function Skills() {
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{
-                    background: dominantColors[skill.name]
-                      ? `radial-gradient(300px circle at center, ${dominantColors[skill.name]}, transparent 70%)`
-                      : "transparent",
+                    background: `radial-gradient(300px circle at center, ${skill.color}, transparent 70%)`,
                     filter: "blur(60px)",
                     transform: "scale(1.2)"
                   }}
