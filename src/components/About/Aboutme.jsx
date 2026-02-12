@@ -61,10 +61,10 @@ const AboutMe = () => {
 
           <div className="flex justify-center relative">
             <ScrollReveal direction="left" delay={0.4}>
-              <div className="relative w-full max-w-[450px] aspect-[3/4] rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl group">
+              <div className="relative w-full max-w-[500px] aspect-[3/2] rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl group">
                 <motion.img
-                  src="./Anil_sai.png"
-                  alt="Profile placeholder"
+                  src="/Anil_sai.png"
+                  alt="Anil Sai"
                   className="w-full h-full object-cover object-top"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1.0] }}
