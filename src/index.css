@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&display=swap');
 @import "tailwindcss";
 
+@media (min-width: 1024px) {
+    * {
+        cursor: none !important;
+    }
+}
+
 html {
     scroll-behavior: smooth;
 }

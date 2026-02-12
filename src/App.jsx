@@ -7,6 +7,7 @@ import Contactme from './components/Contact/Contactme.jsx';
 import { NavbarDemo } from './components/ui/navbar';
 import React, { useEffect, useState, lazy, Suspense } from 'react';
 
+import CustomCursor from './components/ui/CustomCursor.jsx';
 const SplashCursor = lazy(() => import('./components/ui/SplahCurosr'));
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
             <Suspense fallback={null}>
               <SplashCursor />
             </Suspense>
+            <CustomCursor />
           </div>
           <NavbarDemo>
             <Home />
