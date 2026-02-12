@@ -132,5 +132,16 @@ function App() {
     </div>
   );
 }
+const designer = "DESIGNED BY";
+const name = "ANIL SAI";
+
+console.log(
+  `%c${designer}\n%c${name}`,
+  // Subtitle: Muted Silver/Gray
+  "color: #a1a1a6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; line-height: 2;",
+  // Name: Brilliant White with a subtle "glow" for depth
+  "color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 48px; font-weight: 800; letter-spacing: -0.03em; text-shadow: 0 0 10px rgba(255,255,255,0.2);"
+);
+
 
 export default App;
