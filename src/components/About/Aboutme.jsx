@@ -4,7 +4,7 @@ import ScrollReveal from '../ui/ScrollReveal';
 
 const AboutMe = () => {
   return (
-    <div id="about" className="min-h-screen  bg-[#050505]  text-white selection:bg-white/10 flex items-center">
+    <div id="about" className="min-h-screen bg-transparent text-white selection:bg-white/10 flex items-center relative z-10">
       {/* Background Noise/Texture */}
       <div className="fixed inset-0 opacity-[0.03]   pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
@@ -22,8 +22,8 @@ const AboutMe = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={0.3}>
-              <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent italic">
-                ANIL SAI <br />NUNNA.
+              <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent italic pr-4 pb-2">
+                ANIL SAI <br />NUNNA
               </h1>
             </ScrollReveal>
 

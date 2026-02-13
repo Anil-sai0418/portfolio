@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import * as THREE from 'three';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function CrystalSphereBackground() {
   const canvasRef = useRef(null);
@@ -136,14 +136,27 @@ export default function CrystalSphereBackground() {
     };
   }, []);
 
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [window.innerHeight * 1.8, window.innerHeight * 2.8], [1, 0]);
+  const y = useTransform(scrollY, [window.innerHeight * 1.8, window.innerHeight * 2.8], [0, -100]);
+  const filter = useTransform(scrollY, [window.innerHeight * 1.8, window.innerHeight * 2.8], ["blur(0px)", "blur(10px)"]);
+
   return (
-    <div id="home" className="relative w-full h-screen overflow-hidden bg-black">
-      {/* Three.js Canvas Background */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
-        style={{ background: 'radial-gradient(circle at center, #1a1a1a 0%, #000000 100%)' }}
-      />
+    <div id="home" className="relative w-full h-screen overflow-hidden">
+      {/* Three.js Canvas Background - Fixed & Scroll Driven */}
+      <motion.div
+        className="fixed inset-0 w-full h-full z-0"
+        style={{ opacity, y, filter, background: 'radial-gradient(circle at center, #1a1a1a 0%, #000000 100%)' }}
+      >
+        <canvas
+          ref={canvasRef}
+          className="w-full h-full"
+        />
+        {/* Vignette overlay attached to background */}
+        <div className="absolute inset-0 pointer-events-none" style={{
+          background: 'radial-gradient(circle at center, transparent 0%, transparent 50%, rgba(0,0,0,0.4) 100%)'
+        }} />
+      </motion.div>
 
       <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
         <div className="max-w-4xl w-full px-8 mb-24 pointer-events-auto">
@@ -179,13 +192,6 @@ export default function CrystalSphereBackground() {
           </div>
         </div>
       </div>
-
-      {/* Vignette overlay */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(circle at center, transparent 0%, transparent 50%, rgba(0,0,0,0.4) 100%)'
-      }} />
-
-
     </div>
   );
 }

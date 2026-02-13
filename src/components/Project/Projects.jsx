@@ -39,10 +39,10 @@ const PROJECTS = [
     {
         id: 3,
         title: "Scrybyx Notes",
-        category: "AI Infrastructure",
+        category: "Notes Application",
         description: "A smart note‑taking application designed for productivity, allowing users to create, organize, and manage notes with a fast, minimal, and intuitive interface.",
         image: "/Scrybyx.png",
-        tags: ["React.js", "tailwindcss", "Three.js","localstorage" ],
+        tags: ["React.js", "tailwindcss", "Three.js", "localstorage"],
         link: "https://scribyx-notes.vercel.app/",
         github: "https://github.com/Anil-sai0418/online-notes",
         icon: <ClipboardPenLine className="w-6 h-6" />,
@@ -50,7 +50,7 @@ const PROJECTS = [
     {
         id: 4,
         title: "Voxvera",
-        category: "Notes Application",
+        category: "Language Translator",
         description: "A sleek and lightweight notes application built for everyday use, offering structured note organization, quick access, and a visually clean user experience.",
         image: "/Voxvera.png",
         tags: ["React.js", "GT-api", "Seo-optimized", "multi-language support"],
@@ -61,7 +61,7 @@ const PROJECTS = [
     {
         id: 5,
         title: "Phone Book",
-        category: "Security Suite",
+        category: "Contact app",
         description: "A secure phone book application to store and manage contacts with essential details like name, phone number, and email, built with simplicity and reliability in mind.",
         image: "/Phone-book.png",
         tags: ["React.js", "Node.js", "MongoDB", "GlassUI"],
@@ -188,10 +188,10 @@ const ProjectCard = ({ project, index }) => {
                         rel="noopener noreferrer"
                         className="group relative inline-flex items-center justify-center px-6 py-3 pr-10 rounded-full border border-white/20 bg-transparent text-white text-sm font-medium overflow-hidden transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
                     >
-                        <span className="transition-all duration-300 group-hover:-translate-x-1">
+                        <span className="transition-all duration-300 -translate-x-1 md:translate-x-0 md:group-hover:-translate-x-1">
                             Live Project
                         </span>
-                        <SquareArrowOutUpRight className="absolute right-4 w-4 h-4 opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
+                        <SquareArrowOutUpRight className="absolute right-4 w-4 h-4 opacity-100 scale-100 md:opacity-0 md:scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
                     </a>
 
                     <a
@@ -200,10 +200,10 @@ const ProjectCard = ({ project, index }) => {
                         rel="noopener noreferrer"
                         className="group relative inline-flex items-center justify-center px-6 py-3 pr-10 rounded-full border border-white/20 bg-transparent text-white text-sm font-medium overflow-hidden transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
                     >
-                        <span className="transition-all duration-300 group-hover:-translate-x-1">
+                        <span className="transition-all duration-300 -translate-x-1 md:translate-x-0 md:group-hover:-translate-x-1">
                             GitHub Repo
                         </span>
-                        <Github className="absolute right-4 w-4 h-4 opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
+                        <Github className="absolute right-4 w-4 h-4 opacity-100 scale-100 md:opacity-0 md:scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
                     </a>
                 </div>
             </div>

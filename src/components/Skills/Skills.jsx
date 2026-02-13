@@ -50,7 +50,7 @@ export default function Skills() {
   const filteredSkills = filter === "all" ? skills : skills.filter(skill => skill.category === filter);
 
   return (
-    <div id="skills" className="min-h-screen bg-[#050505] text-white overflow-hidden relative py-20">
+    <div id="skills" className="min-h-screen bg-[#050505] text-white overflow-hidden relative z-20 py-20">
       <CursorGradient />
       {/* Background Noise/Texture */}
       <div className="fixed inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
