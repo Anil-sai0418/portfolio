@@ -1157,9 +1157,9 @@ function SplashCursor({
       isOverButton.current =
         element &&
         (element.tagName.toLowerCase() === 'button' ||
-         element.tagName.toLowerCase() === 'a' ||
-         element.classList.contains('btn') ||
-         element.getAttribute('role') === 'button');
+          element.tagName.toLowerCase() === 'a' ||
+          element.classList.contains('btn') ||
+          element.getAttribute('role') === 'button');
     }
 
     window.addEventListener('mousedown', (e) => {
@@ -1263,7 +1263,7 @@ function SplashCursor({
       <canvas
         ref={canvasRef}
         id="fluid"
-        className="w-screen h-screen block"
+        className="w-full h-full block"
         style={{ cursor: "none" }}
       ></canvas>
     </div>
