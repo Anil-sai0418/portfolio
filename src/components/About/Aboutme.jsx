@@ -29,19 +29,19 @@ const AboutMe = () => {
 
             <ScrollReveal delay={0.4}>
               <p className="text-xl text-white/60 leading-relaxed font-light">
-                I’m a passionate full‑stack developer who loves turning ideas into clean,
-                scalable, and user‑focused digital products. I enjoy working across the
-                stack — from crafting polished interfaces to building reliable backend
-                systems — with a strong focus on{" "}
-                <span className="text-white">quality</span>,{" "}
-                <span className="text-white">performance</span>, and{" "}
-                <span className="text-white">real‑world impact</span>.
+                I’m currently working as a <span className="text-white">Frontend Intern at Transetu</span> with
+                <span className="text-white"> 3 months of hands-on experience</span> building responsive,
+                user-friendly, and high-performance web applications. As a passionate developer
+                and B.Tech student, I enjoy transforming ideas into clean and scalable
+                digital experiences, with strong attention to <span className="text-white">design</span>,{" "}
+                <span className="text-white">usability</span>, and{" "}
+                <span className="text-white">real-world impact</span>.
               </p>
             </ScrollReveal>
 
             {/* Quote */}
             <ScrollReveal delay={0.6} yOffset={30}>
-              <div className="mt-10 relative max-w-md">
+              <div className="mt-10 relative max-w-xl">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/40 to-transparent opacity-30 blur-sm rounded-xl" />
 
                 <div className="relative bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-xl p-6 overflow-hidden">
