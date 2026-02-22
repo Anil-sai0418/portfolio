@@ -124,6 +124,8 @@ const MagneticButton = ({ children, className }) => {
 };
 
 const ProjectCard = ({ project, index }) => {
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
@@ -131,27 +133,38 @@ const ProjectCard = ({ project, index }) => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1.0] }}
             whileHover={{ y: -10, transition: { duration: 0.4, ease: "easeOut" } }}
-            className="flex-shrink-0 w-[85vw] md:w-[600px] lg:w-[700px] h-[70vh] md:h-[600px] relative group rounded-3xl overflow-hidden bg-[#111] border border-white/5 shadow-2xl"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className={`flex-shrink-0 w-[85vw] md:w-[600px] lg:w-[700px] h-[70vh] md:h-[600px] relative group rounded-3xl overflow-hidden border-2 shadow-2xl ${project.id === 3 ? 'bg-white border-white' : 'bg-[#111] border-white/10'}`}
         >
             {/* Background Image with Zoom Effect */}
             <div className="absolute inset-0 overflow-hidden">
                 <motion.div
-                    whileHover={{ scale: 1.05 }}
+                    animate={{ scale: isHovered ? 1.05 : 1 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
                     className="w-full h-full"
                 >
                     <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"
+                        className="w-full h-full object-cover"
                     />
                 </motion.div>
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent" />
+                {/* Gradient Overlay - Only visible on hover */}
+                <motion.div
+                    animate={{ opacity: isHovered ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent pointer-events-none"
+                />
             </div>
 
-            {/* Content */}
-            <div className="absolute inset-0 p-6 md:p-12 flex flex-col justify-end">
+            {/* Content - Only visible on hover */}
+            <motion.div
+                animate={{ opacity: isHovered ? 1 : 0 }}
+                transition={{ duration: 0.3 }}
+                className="absolute inset-0 p-6 md:p-12 flex flex-col justify-end pointer-events-none"
+                style={{ pointerEvents: isHovered ? 'auto' : 'none' }}
+            >
                 <div className="mb-4">
                     <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-white/80 mb-4">
                         {project.icon}
@@ -206,7 +219,7 @@ const ProjectCard = ({ project, index }) => {
                         <Github className="absolute right-4 w-4 h-4 opacity-100 scale-100 md:opacity-0 md:scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
                     </a>
                 </div>
-            </div>
+            </motion.div>
 
             {/* Index Number */}
             <div className="absolute top-8 right-8 text-8xl font-bold text-white/5 select-none pointer-events-none">
@@ -284,20 +297,12 @@ export default function ProjectShowcase() {
                     </p>
                 </motion.div>
 
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1, duration: 1 }}
-                    className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-                >
-                    <span className="text-xs uppercase tracking-widest text-white/30">Scroll to Explore</span>
-                    <div className="w-[1px] h-16 bg-gradient-to-b from-white/30 to-transparent" />
-                </motion.div>
+
             </section>
 
             {/* Horizontal Scroll Section */}
             <div ref={containerRef} className="relative h-[300vh]">
-                <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+                <div className="sticky top-20 md:top-15 h-screen flex items-center overflow-hidden">
                     <motion.div
                         style={{ x }}
                         className="flex gap-4 sm:gap-8 px-4 sm:px-16 lg:px-24"
@@ -310,9 +315,15 @@ export default function ProjectShowcase() {
                         <div className="flex-shrink-0 w-[50vw] md:w-[400px] h-[70vh] md:h-[600px] flex items-center justify-center">
                             <div className="text-center">
                                 <h3 className="text-3xl font-bold mb-4">Want to see more?</h3>
-                                <MagneticButton className="bg-white text-black">
-                                    View All Projects
-                                </MagneticButton>
+                                <a
+                                    href="https://github.com/Anil-sai0418?tab=repositories"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <MagneticButton className="bg-white text-black">
+                                        View All Projects
+                                    </MagneticButton>
+                                </a>
                             </div>
                         </div>
                     </motion.div>
