@@ -178,7 +178,7 @@ export default function CrystalSphereBackground() {
               className="text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter mb-6 md:mb-8 text-white mix-blend-overlay opacity-90"
             >
               FULL STACK<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">ENGINEER.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">DEVELOPER.</span>
             </motion.h1>
 
             <motion.p

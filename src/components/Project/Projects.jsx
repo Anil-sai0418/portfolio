@@ -135,7 +135,7 @@ const ProjectCard = ({ project, index }) => {
             whileHover={{ y: -10, transition: { duration: 0.4, ease: "easeOut" } }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className={`flex-shrink-0 w-[85vw] md:w-[600px] lg:w-[700px] h-[70vh] md:h-[600px] relative group rounded-3xl overflow-hidden border-2 shadow-2xl ${project.id === 3 ? 'bg-white border-white' : 'bg-[#111] border-white/10'}`}
+            className={`flex-shrink-0 w-[90vw] sm:w-[85vw] md:w-[600px] lg:w-[700px] h-[60vh] sm:h-[70vh] md:h-[600px] relative group rounded-2xl sm:rounded-3xl overflow-hidden border-2 shadow-2xl ${project.id === 3 ? 'bg-white border-white' : 'bg-[#111] border-white/10'}`}
         >
             {/* Background Image with Zoom Effect */}
             <div className="absolute inset-0 overflow-hidden">
@@ -150,76 +150,71 @@ const ProjectCard = ({ project, index }) => {
                         className="w-full h-full object-cover"
                     />
                 </motion.div>
-                {/* Gradient Overlay - Only visible on hover */}
-                <motion.div
-                    animate={{ opacity: isHovered ? 1 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent pointer-events-none"
+                {/* Gradient Overlay - Always visible on mobile, hover on desktop */}
+                <div
+                    className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent pointer-events-none opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 />
             </div>
 
-            {/* Content - Only visible on hover */}
-            <motion.div
-                animate={{ opacity: isHovered ? 1 : 0 }}
-                transition={{ duration: 0.3 }}
-                className="absolute inset-0 p-6 md:p-12 flex flex-col justify-end pointer-events-none"
-                style={{ pointerEvents: isHovered ? 'auto' : 'none' }}
+            {/* Content - Always visible on mobile, hover on desktop */}
+            <div
+                className="absolute inset-0 p-4 sm:p-6 md:p-12 flex flex-col justify-end opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto md:pointer-events-none md:group-hover:pointer-events-auto"
             >
-                <div className="mb-4">
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-white/80 mb-4">
+                <div className="mb-3 sm:mb-4">
+                    <span className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-white/80 mb-3 sm:mb-4">
                         {project.icon}
                         {project.category}
                     </span>
                 </div>
 
-                <h3 className="text-3xl md:text-5xl font-bold text-white mb-2 md:mb-4 tracking-tight leading-tight">
+                <h3 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-2 md:mb-4 tracking-tight leading-tight">
                     {project.title}
                 </h3>
 
-                <p className="text-white/60 text-base md:text-lg mb-6 md:mb-8 max-w-md leading-relaxed hidden sm:block">
+                <p className="text-white/60 text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8 max-w-md leading-relaxed hidden sm:block">
                     {project.description}
                 </p>
-                <p className="text-white/60 text-sm mb-6 max-w-md leading-relaxed block sm:hidden">
-                    {project.description.substring(0, 100)}...
+                <p className="text-white/60 text-xs sm:text-sm mb-4 sm:mb-6 max-w-md leading-relaxed block sm:hidden">
+                    {project.description.substring(0, 80)}...
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="flex flex-wrap gap-2 mb-6 sm:mb-8">
                     {project.tags.map((tag) => (
                         <span
                             key={tag}
-                            className="px-3 py-1 rounded-full border border-white/10 bg-black/20 text-xs text-white/70 backdrop-blur-sm"
+                            className="px-2 sm:px-3 py-1 rounded-full border border-white/10 bg-black/20 text-xs text-white/70 backdrop-blur-sm"
                         >
                             {tag}
                         </span>
                     ))}
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
                     <a
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative inline-flex items-center justify-center px-6 py-3 pr-10 rounded-full border border-white/20 bg-transparent text-white text-sm font-medium overflow-hidden transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+                        className="group relative inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 pr-8 sm:pr-10 rounded-full border border-white/20 bg-transparent text-white text-xs sm:text-sm font-medium overflow-hidden transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
                     >
                         <span className="transition-all duration-300 -translate-x-1 md:translate-x-0 md:group-hover:-translate-x-1">
                             Live Project
                         </span>
-                        <SquareArrowOutUpRight className="absolute right-4 w-4 h-4 opacity-100 scale-100 md:opacity-0 md:scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
+                        <SquareArrowOutUpRight className="absolute right-2 sm:right-4 w-3 sm:w-4 h-3 sm:h-4 opacity-100 scale-100 md:opacity-0 md:scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
                     </a>
 
                     <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative inline-flex items-center justify-center px-6 py-3 pr-10 rounded-full border border-white/20 bg-transparent text-white text-sm font-medium overflow-hidden transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+                        className="group relative inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 pr-8 sm:pr-10 rounded-full border border-white/20 bg-transparent text-white text-xs sm:text-sm font-medium overflow-hidden transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
                     >
                         <span className="transition-all duration-300 -translate-x-1 md:translate-x-0 md:group-hover:-translate-x-1">
                             GitHub Repo
                         </span>
-                        <Github className="absolute right-4 w-4 h-4 opacity-100 scale-100 md:opacity-0 md:scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
+                        <Github className="absolute right-2 sm:right-4 w-3 sm:w-4 h-3 sm:h-4 opacity-100 scale-100 md:opacity-0 md:scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
                     </a>
                 </div>
-            </motion.div>
+            </div>
 
             {/* Index Number */}
             <div className="absolute top-8 right-8 text-8xl font-bold text-white/5 select-none pointer-events-none">
@@ -280,7 +275,7 @@ export default function ProjectShowcase() {
             <CursorGradient />
 
             {/* Hero Section */}
-            <section className="h-screen flex flex-col justify-center items-center relative px-6">
+            <section className="pt-32 pb-10 md:pt-40 md:pb-20 flex flex-col justify-center items-center relative px-6">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-20" />
 
                 <motion.div
@@ -289,10 +284,10 @@ export default function ProjectShowcase() {
                     transition={{ duration: 1, ease: "easeOut" }}
                     className="text-center z-10 max-w-4xl"
                 >
-                    <h1 className="text-6xl md:text-8xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50">
+                    <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50">
                         Selected Works
                     </h1>
-                    <p className="text-xl md:text-2xl text-white/40 font-light max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-lg sm:text-xl md:text-2xl text-white/40 font-light max-w-2xl mx-auto leading-relaxed px-2">
                         Real-world apps built with clean design, strong performance, and practical functionality.
                     </p>
                 </motion.div>
@@ -301,8 +296,8 @@ export default function ProjectShowcase() {
             </section>
 
             {/* Horizontal Scroll Section */}
-            <div ref={containerRef} className="relative h-[300vh]">
-                <div className="sticky top-20 md:top-15 h-screen flex items-center overflow-hidden">
+            <div ref={containerRef} className="relative h-[300vh] -mt-10 md:mt-10">
+                <div className="sticky top-20 md:top-24 h-[75vh] md:h-[80vh] flex items-center overflow-hidden">
                     <motion.div
                         style={{ x }}
                         className="flex gap-4 sm:gap-8 px-4 sm:px-16 lg:px-24"
@@ -312,15 +307,15 @@ export default function ProjectShowcase() {
                         ))}
 
                         {/* End Card */}
-                        <div className="flex-shrink-0 w-[50vw] md:w-[400px] h-[70vh] md:h-[600px] flex items-center justify-center">
-                            <div className="text-center">
-                                <h3 className="text-3xl font-bold mb-4">Want to see more?</h3>
+                        <div className="flex-shrink-0 w-[90vw] sm:w-[85vw] md:w-[400px] h-[60vh] sm:h-[70vh] md:h-[600px] flex items-center justify-center">
+                            <div className="text-center px-4">
+                                <h3 className="text-2xl sm:text-3xl font-bold mb-4">Want to see more?</h3>
                                 <a
                                     href="https://github.com/Anil-sai0418?tab=repositories"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    <MagneticButton className="bg-white text-black">
+                                    <MagneticButton className="bg-white text-black text-xs sm:text-base">
                                         View All Projects
                                     </MagneticButton>
                                 </a>

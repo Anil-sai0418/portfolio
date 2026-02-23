@@ -39,27 +39,9 @@ const AboutMe = () => {
               </p>
             </ScrollReveal>
 
-            {/* Quote */}
-            <ScrollReveal delay={0.6} yOffset={30}>
-              <div className="mt-10 relative max-w-xl">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/40 to-transparent opacity-30 blur-sm rounded-xl" />
-
-                <div className="relative bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-xl p-6 overflow-hidden">
-                  <p className="text-3xl text-white/90 leading-relaxed font-saint">
-                    “Success begins with a single belief — that you are capable.
-                    Trust yourself, take action, and watch possibilities turn into reality.”
-                  </p>
-
-                  <div className="mt-4 text-sm font-medium tracking-widest text-blue-400 uppercase opacity-80">
-                    ~ Anil Sai
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-
           </div>
 
-          <div className="flex justify-center relative">
+          <div className="flex justify-center relative mt-12 md:mt-0">
             <ScrollReveal direction="left" delay={0.4}>
               <div className="relative w-full max-w-[500px] aspect-[3/2] rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl group">
                 <motion.img
@@ -87,9 +69,27 @@ const AboutMe = () => {
           </div>
         </div>
 
+        {/* Quote Section - Now comes after the image on smaller screens */}
+        <div className="w-full flex md:justify-start justify-center mt-10 md:mt-2">
+          <ScrollReveal delay={0.6} yOffset={30}>
+            <div className="relative max-w-xl w-full">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/40 to-transparent opacity-30 blur-sm rounded-xl" />
+
+              <div className="relative bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-xl p-6 overflow-hidden">
+                <p className="text-2xl md:text-3xl text-white/90 leading-relaxed font-saint">
+                  “Success begins with a single belief — that you are capable.
+                  Trust yourself, take action, and watch possibilities turn into reality.”
+                </p>
+
+                <div className="mt-4 text-sm font-medium tracking-widest text-blue-400 uppercase opacity-80">
+                  ~ Anil Sai
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+
       </main>
-
-
     </div>
   );
 };
