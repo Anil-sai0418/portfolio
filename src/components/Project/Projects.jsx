@@ -189,31 +189,36 @@ const ProjectCard = ({ project, index }) => {
                     ))}
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-                    <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group relative inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 pr-8 sm:pr-10 rounded-full border border-white/20 bg-transparent text-white text-xs sm:text-sm font-medium overflow-hidden transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
-                    >
-                        <span className="transition-all duration-300 -translate-x-1 md:translate-x-0 md:group-hover:-translate-x-1">
-                            Live Project
-                        </span>
-                        <SquareArrowOutUpRight className="absolute right-2 sm:right-4 w-3 sm:w-4 h-3 sm:h-4 opacity-100 scale-100 md:opacity-0 md:scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
-                    </a>
+              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
 
-                    <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group relative inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 pr-8 sm:pr-10 rounded-full border border-white/20 bg-transparent text-white text-xs sm:text-sm font-medium overflow-hidden transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
-                    >
-                        <span className="transition-all duration-300 -translate-x-1 md:translate-x-0 md:group-hover:-translate-x-1">
-                            GitHub Repo
-                        </span>
-                        <Github className="absolute right-2 sm:right-4 w-3 sm:w-4 h-3 sm:h-4 opacity-100 scale-100 md:opacity-0 md:scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
-                    </a>
-                </div>
+  {/* Live Project */}
+  <a
+    href={project.link}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-white/20 bg-transparent text-white text-xs sm:text-sm font-medium transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+  >
+    {/* Hidden icon */}
+    <SquareArrowOutUpRight className="w-4 h-4 hidden group-hover:inline-block" />
+
+    <span>Live Demo</span>
+  </a>
+
+
+  {/* Source */}
+  <a
+    href={project.github}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-white/20 bg-transparent text-white text-xs sm:text-sm font-medium transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+  >
+    {/* Hidden icon */}
+    <Github className="w-4 h-4 hidden group-hover:inline-block" />
+
+    <span>Source</span>
+  </a>
+
+</div>
             </div>
 
             {/* Index Number */}

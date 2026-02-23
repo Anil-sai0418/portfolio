@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
-import StaggerContainer, { StaggerItem } from '../ui/StaggerContainer';
 
 const skills = [
   { name: "HTML", src: "/html.webp", category: "frontend", color: "rgb(227, 76, 38)" },
@@ -105,11 +104,36 @@ export default function Skills() {
 
 
         {/* Skills Grid */}
-        <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 w-full max-w-6xl px-2 sm:px-0">
+        <motion.div
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 w-full max-w-6xl px-2 sm:px-0"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.1 }
+            }
+          }}
+        >
           <AnimatePresence mode='popLayout'>
             {filteredSkills.map((skill, index) => (
-              <StaggerItem
+              <motion.div
+                layout
                 key={skill.name}
+                variants={{
+                  hidden: { opacity: 0, y: 20, scale: 0.95 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: { type: "spring", stiffness: 100, damping: 10 }
+                  }
+                }}
+                initial="hidden"
+                animate="visible"
+                exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
                 className="group relative flex flex-col items-center justify-center p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm transition-all duration-500 aspect-square overflow-hidden"
               >
                 <div
@@ -132,10 +156,10 @@ export default function Skills() {
                     {skill.name}
                   </h3>
                 </motion.div>
-              </StaggerItem>
+              </motion.div>
             ))}
           </AnimatePresence>
-        </StaggerContainer>
+        </motion.div>
 
       </div>
     </div>
