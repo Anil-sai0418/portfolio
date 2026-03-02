@@ -150,15 +150,20 @@ const ProjectCard = ({ project, index }) => {
                         className="w-full h-full object-cover"
                     />
                 </motion.div>
-                {/* Gradient Overlay - Always visible on mobile, hover on desktop */}
-                <div
-                    className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent pointer-events-none opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                {/* Gradient Overlay - Only visible on hover */}
+                <motion.div
+                    animate={{ opacity: isHovered ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent pointer-events-none"
                 />
             </div>
 
-            {/* Content - Always visible on mobile, hover on desktop */}
-            <div
-                className="absolute inset-0 p-4 sm:p-6 md:p-12 flex flex-col justify-end opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto md:pointer-events-none md:group-hover:pointer-events-auto"
+            {/* Content - Only visible on hover */}
+            <motion.div
+                animate={{ opacity: isHovered ? 1 : 0 }}
+                transition={{ duration: 0.3 }}
+                className="absolute inset-0 p-4 sm:p-6 md:p-12 flex flex-col justify-end pointer-events-none"
+                style={{ pointerEvents: isHovered ? 'auto' : 'none' }}
             >
                 <div className="mb-3 sm:mb-4">
                     <span className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-white/80 mb-3 sm:mb-4">
@@ -189,37 +194,32 @@ const ProjectCard = ({ project, index }) => {
                     ))}
                 </div>
 
-              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+                <div className="flex flex-row items-center gap-2 sm:gap-4">
+                    <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/link flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-white/20 bg-transparent text-white text-xs sm:text-sm font-medium transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+                    >
+                        <span className="whitespace-nowrap transition-all duration-300">Live Project</span>
+                        <span className="flex items-center justify-center overflow-hidden transition-all duration-300 w-3 sm:w-4 ml-2 md:w-0 md:ml-0 md:group-hover/link:w-4 md:group-hover/link:ml-2 md:opacity-0 md:group-hover/link:opacity-100">
+                            <SquareArrowOutUpRight className="w-3 sm:w-4 h-3 sm:h-4 shrink-0" />
+                        </span>
+                    </a>
 
-  {/* Live Project */}
-  <a
-    href={project.link}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="group inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-white/20 bg-transparent text-white text-xs sm:text-sm font-medium transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
-  >
-    {/* Hidden icon */}
-    <SquareArrowOutUpRight className="w-4 h-4 hidden group-hover:inline-block" />
-
-    <span>Live Demo</span>
-  </a>
-
-
-  {/* Source */}
-  <a
-    href={project.github}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="group inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-white/20 bg-transparent text-white text-xs sm:text-sm font-medium transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
-  >
-    {/* Hidden icon */}
-    <Github className="w-4 h-4 hidden group-hover:inline-block" />
-
-    <span>Source</span>
-  </a>
-
-</div>
-            </div>
+                    <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/link flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-white/20 bg-transparent text-white text-xs sm:text-sm font-medium transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+                    >
+                        <span className="whitespace-nowrap transition-all duration-300">GitHub Repo</span>
+                        <span className="flex items-center justify-center overflow-hidden transition-all duration-300 w-3 sm:w-4 ml-2 md:w-0 md:ml-0 md:group-hover/link:w-4 md:group-hover/link:ml-2 md:opacity-0 md:group-hover/link:opacity-100">
+                            <Github className="w-3 sm:w-4 h-3 sm:h-4 shrink-0" />
+                        </span>
+                    </a>
+                </div>
+            </motion.div>
 
             {/* Index Number */}
             <div className="absolute top-8 right-8 text-8xl font-bold text-white/5 select-none pointer-events-none">
@@ -280,7 +280,7 @@ export default function ProjectShowcase() {
             <CursorGradient />
 
             {/* Hero Section */}
-            <section className="pt-32 pb-10 md:pt-40 md:pb-20 flex flex-col justify-center items-center relative px-6">
+            <section className="h-screen flex flex-col justify-center items-center relative px-6">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-20" />
 
                 <motion.div
@@ -301,8 +301,8 @@ export default function ProjectShowcase() {
             </section>
 
             {/* Horizontal Scroll Section */}
-            <div ref={containerRef} className="relative h-[300vh] -mt-10 md:mt-10">
-                <div className="sticky top-20 md:top-24 h-[75vh] md:h-[80vh] flex items-center overflow-hidden">
+            <div ref={containerRef} className="relative h-[300vh]">
+                <div className="sticky top-20 md:top-15 h-screen flex items-center overflow-hidden">
                     <motion.div
                         style={{ x }}
                         className="flex gap-4 sm:gap-8 px-4 sm:px-16 lg:px-24"
