@@ -4,9 +4,12 @@ const CustomCursor = () => {
     const cursorRef = useRef(null);
     const dotRef = useRef(null);
     const [isPointer, setIsPointer] = useState(false);
+    const [isVisible, setIsVisible] = useState(false); // Initially hidden
 
     useEffect(() => {
         const handleMouseMove = (e) => {
+            if (!isVisible) setIsVisible(true); // Show on first move
+
             if (cursorRef.current) {
                 cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
             }
@@ -26,17 +29,24 @@ const CustomCursor = () => {
             }
         };
 
+        const handleMouseLeave = () => setIsVisible(false);
+        const handleMouseEnter = () => setIsVisible(true);
+
         window.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseleave', handleMouseLeave);
+        document.addEventListener('mouseenter', handleMouseEnter);
 
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseleave', handleMouseLeave);
+            document.removeEventListener('mouseenter', handleMouseEnter);
         };
-    }, []);
+    }, [isVisible]);
 
     return (
         <div
             ref={cursorRef}
-            className="fixed top-0 left-0 pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
+            className={`fixed top-0 left-0 pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
         >
             <div
                 ref={dotRef}
