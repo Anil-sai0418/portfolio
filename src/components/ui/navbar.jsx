@@ -16,6 +16,7 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
+  DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
@@ -75,14 +76,15 @@ export function NavbarDemo({ children }) {
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   />
                 </DrawerTrigger>
-                <DrawerContent className="bg-white/20 dark:bg-white/10 backdrop-blur-xl border border-white/30 text-white font-bold shadow-2xl">
+                <DrawerContent className="bg-white/10 dark:bg-white/10 backdrop-blur-xl border border-white/30 text-white shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
                   <DrawerHeader>
-                    <DrawerDescription className="flex flex-col gap-3 pt-4 items-center">
+                    <DrawerTitle className="sr-only">Navigation Menu</DrawerTitle>
+                    <DrawerDescription className="flex flex-col gap-4 pt-6 items-center font-[Poppins] tracking-wide">
                       {navItems.map(({ name, link }, index) => (
                         <button
                           key={index}
                           onClick={() => scrollToSection(link.substring(1))}
-                          className="text-lg text-white bg-white/10 backdrop-blur-md py-2 w-full max-w-xs text-center rounded-md hover:bg-white/20 transition-all duration-200"
+                          className="text-lg text-white font-medium tracking-wider py-2 w-full max-w-xs text-center transition-all duration-300 hover:scale-105 hover:text-white/80"
                         >
                           {name}
                         </button>

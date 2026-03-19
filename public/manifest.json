@@ -1,0 +1,23 @@
+{
+  "name": "Anil Sai Nunna - Full Stack Developer Portfolio",
+  "short_name": "Anil Sai Portfolio",
+  "description": "Full Stack Developer Portfolio showcasing projects, skills, and experience",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/anil.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/anil.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import { NavbarDemo } from './components/ui/navbar';
 import React, { useEffect, useState, lazy, Suspense } from 'react';
 
 import CustomCursor from './components/ui/CustomCursor.jsx';
+import ContactMe from './components/Contact/Contactme';
 const SplashCursor = lazy(() => import('./components/ui/SplahCurosr'));
 
 function App() {
@@ -61,19 +62,20 @@ function App() {
           </div>
         )}
 
-        <div className={showPopup ? "blur-sm pointer-events-none" : ""}>
+        <div className={showPopup ? "blur-sm pointer-events-none" : ""} inert={showPopup ? "inert" : undefined}>
           <div className="hidden lg:block">
-            <Suspense fallback={null}>
+            {/* <Suspense fallback={null}>
               <SplashCursor />
-            </Suspense>
+            </Suspense> */}
             <CustomCursor />
           </div>
           <NavbarDemo>
             <Home />
-            <Aboutme />
-            <Skills />
+            {/* <Aboutme />
+            <Skills /> */}
             <Projects />
-            <Contactme />
+            {/* <ContactMe/> */}
+
           </NavbarDemo>
         </div>
       </>

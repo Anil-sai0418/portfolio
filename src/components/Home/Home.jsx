@@ -18,20 +18,6 @@ export default function CrystalSphereBackground() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Create circular texture
-    const getTexture = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = 32;
-      canvas.height = 32;
-      const ctx = canvas.getContext('2d');
-      ctx.beginPath();
-      ctx.arc(16, 16, 16, 0, 2 * Math.PI);
-      ctx.fillStyle = '#ffffff';
-      ctx.fill();
-      const texture = new THREE.CanvasTexture(canvas);
-      return texture;
-    };
-
     // Create particles in a sphere formation
     const particleCount = 3000;
     const geometry = new THREE.BufferGeometry();
@@ -66,9 +52,7 @@ export default function CrystalSphereBackground() {
       size: 0.2, // Slightly larger to compensate for circular shape
       transparent: true,
       opacity: 0.6,
-      sizeAttenuation: true,
-      map: getTexture(),
-      alphaTest: 0.5
+      sizeAttenuation: true
     });
 
     const particles = new THREE.Points(geometry, material);

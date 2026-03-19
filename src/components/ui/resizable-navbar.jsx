@@ -9,18 +9,14 @@ import {
   useMotionValueEvent,
 } from "motion/react";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 
 export const Navbar = ({
   children,
   className
 }) => {
-  const ref = useRef(null);
-  const { scrollY } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
+  const { scrollY } = useScroll();
   const [visible, setVisible] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -33,9 +29,8 @@ export const Navbar = ({
 
   return (
     <motion.div
-      ref={ref}
       // IMPORTANT: Change this to class of `fixed` if you want the navbar to be fixed
-      className={cn("sticky inset-x-0 top-5 z-40 w-full bg-transparent", className)}>
+      className={cn("sticky top-5 inset-x-0 z-40 w-full bg-transparent", className)}>
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(child, { visible })
