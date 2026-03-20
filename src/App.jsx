@@ -64,17 +64,17 @@ function App() {
 
         <div className={showPopup ? "blur-sm pointer-events-none" : ""} inert={showPopup ? "inert" : undefined}>
           <div className="hidden lg:block">
-            {/* <Suspense fallback={null}>
+            <Suspense fallback={null}>
               <SplashCursor />
-            </Suspense> */}
+            </Suspense>
             <CustomCursor />
           </div>
           <NavbarDemo>
             <Home />
-            {/* <Aboutme />
-            <Skills /> */}
+            <Aboutme />
+            <Skills />
             <Projects />
-            {/* <ContactMe/> */}
+            <ContactMe/>
 
           </NavbarDemo>
         </div>
