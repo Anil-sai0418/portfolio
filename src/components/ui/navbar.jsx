@@ -53,7 +53,7 @@ export function NavbarDemo({ children }) {
           <div className="flex items-center z-10 gap-4 font-bold">
             <NavbarButton
               as="a"
-              href="https://drive.google.com/file/d/1Trvw2-85O7SUmUdjQX0Fg7hY2MRoJDMh/view?usp=sharing"
+              href="https://drive.google.com/file/d/1v7TF-kPk1R4vR_l2O3FhrQtmyw9Ut6Yk/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               variant="primary"
@@ -65,10 +65,10 @@ export function NavbarDemo({ children }) {
         </NavBody>
 
         {/* Mobile Navigation */}
-        <MobileNav className="lg:hidden">
+        <MobileNav className="lg:hidden ">
           <MobileNavHeader>
             <NavbarLogo />
-            <div className="flex items-center gap-4 ">
+            <div className="flex items-center  gap-4 ">
               <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <DrawerTrigger>
                   <MobileNavToggle
@@ -94,7 +94,7 @@ export function NavbarDemo({ children }) {
                   <DrawerFooter className="flex">
                     <NavbarButton
                       as="a"
-                      href="https://drive.google.com/file/d/1Trvw2-85O7SUmUdjQX0Fg7hY2MRoJDMh/view?usp=sharing"
+                      href="https://drive.google.com/file/d/1v7TF-kPk1R4vR_l2O3FhrQtmyw9Ut6Yk/view?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
                       variant="primary"

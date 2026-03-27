@@ -1,0 +1,329 @@
+AI_CONTEXT_FILE - Anil Sai Nunna Portfolio Application
+===================================================
+
+## QUICK REFERENCE
+
+PROJECT: Modern Full Stack Developer Portfolio
+BUILT WITH: React, Vite, Tailwind CSS, Framer Motion, Three.js
+DEPLOYED: Vercel (https://anilsai-portfolio.vercel.app/)
+GITHUB: https://github.com/Anil-sai0418/portfolio
+
+## MAIN SECTIONS
+
+1. HOME - 3D Particle Animation Hero
+   - Three.js WebGL with 3000 particles
+   - Fibonacci sphere distribution
+   - Scroll-driven fade/blur effect
+   - Responsive animated headline
+
+2. NAVBAR - Glass Morphism Navigation
+   - Desktop: Horizontal menu with hover effects
+   - Mobile: Hamburger menu with drawer
+   - Scroll detection (visible after 100px)
+   - Resume button to Google Drive PDF
+
+3. PROJECTS - Interactive Carousel
+   - 6 Featured projects showcase
+   - Horizontal scroll (desktop) / Vertical stack (mobile)
+   - Live demo + GitHub links
+   - Parallax title animation
+   - Magnetic button interactions
+
+4. ABOUT - Professional Summary
+5. SKILLS - Technical Expertise
+6. CONTACT - Communication Info
+
+## DESIGN PATTERN
+
+GLASS MORPHISM AESTHETIC:
+- Background: white/10 (translucent white)
+- Backdrop: blur(10-20px)
+- Border: white/30 (subtle light)
+- Shadow: 0_8px_32px_rgba(0,0,0,0.4)
+- Radius: 1.5-3rem curves
+- Primary Colors: Black (#000000) + White (#ffffff)
+
+## KEY FEATURES
+
+✓ Responsive Design (Mobile & Desktop)
+✓ Scroll-Driven Animations
+✓ 3D WebGL Particle Effects
+✓ Accessibility Compliant (WCAG)
+✓ SEO Optimized
+✓ PWA Manifest Support
+✓ Custom Cursor (Desktop only)
+✓ Mobile Drawer Navigation
+✓ Performance Optimized
+✓ Lazy Loading Components
+
+## TECH STACK SUMMARY
+
+Frontend:
+- React 18 (UI library)
+- Vite (Build tool, ultra-fast)
+- Tailwind CSS (Styling)
+- Framer Motion (Animations)
+- Three.js (3D graphics)
+
+UI Components:
+- Radix UI (Accessible primitives)
+- Lucide React (Icons)
+- Custom Glass Components
+
+Tools:
+- ESLint (Code quality)
+- Vercel (Hosting)
+- GitHub (Version control)
+
+## FOLDER STRUCTURE
+
+src/
+├── components/
+│   ├── Home/          # Hero with 3D particles
+│   ├── About/         # Professional intro
+│   ├── Skills/        # Technical skills
+│   ├── Project/       # Project carousel
+│   ├── Contact/       # Contact info
+│   └── ui/            # Reusable components
+│       ├── navbar.jsx         # Nav bar
+│       ├── drawer.jsx         # Glass drawer
+│       ├── CustomCursor.jsx   # Custom cursor
+│       └── ...more ui files
+├── hooks/
+│   └── useScrollAnimation.js  # Scroll hook
+├── lib/
+│   └── utils.js               # Helper functions
+├── App.jsx            # Main component
+├── main.jsx           # Entry point
+└── App.css            # Global styles
+
+## COMPONENT BREAKDOWN
+
+HOME.jsx:
+- Creates WebGL renderer with Three.js
+- 3000 particles in Fibonacci sphere pattern
+- Entry animation (scale 0 → 1)
+- Rotation + breathing animation
+- Scroll opacity/blur transform
+- Window resize responsive
+
+NAVBAR.jsx + RESIZABLE-NAVBAR.jsx:
+- useScroll() for scroll detection
+- Navigation items: About, Skills, Projects, Contact
+- Glass-morphism drawer for mobile
+- Smooth scrollIntoView() navigation
+- Sticky positioning with blur on scroll
+
+PROJECTS.jsx:
+- Parallax animated title
+- Horizontal scroll carousel (desktop)
+- Vertical stack (mobile)
+- Project card hover effects
+- Gradient overlays
+- Magnetic button effects
+- Cursor gradient background
+
+DRAWER.jsx:
+- Premium glass-morphism styling
+- Accessible DrawerTitle (sr-only)
+- Backdrop blur effect
+- Smooth animations
+- Responsive positioning
+
+## STATE MANAGEMENT
+
+App Level:
+- showPopup: Mobile warning modal
+- sessionStorage: Track popup shown
+
+Component Level:
+- isMobileMenuOpen: Drawer state
+- isMobile: Responsive view
+- Various: Animation/hover states
+
+Simple approach: No Redux needed due to linear scroll structure
+
+## ANIMATIONS & INTERACTIONS
+
+Scroll Animations:
+- Parallax text assembly
+- Fade in/out on scroll progress
+- Blur effects linked to scroll
+- Staggered element reveals
+
+Hover Effects:
+- Scale & shadow transforms
+- Gradient overlays
+- Button magnetic attraction
+- Smooth color transitions
+
+Entry Animations:
+- Opacity fade-in
+- Y-axis translate
+- Scale growth
+- Staggered timing
+
+## ACCESSIBILITY FEATURES
+
+✓ Semantic HTML structure
+✓ ARIA labels on interactive elements
+✓ Keyboard navigation (Tab, Enter)
+✓ Focus management with inert attribute
+✓ Screen reader support
+✓ DrawerTitle for dialog accessibility
+✓ Color contrast (WCAG AA)
+✓ Respects prefers-reduced-motion
+✓ Proper link semantics
+
+## PERFORMANCE OPTIMIZATIONS
+
+1. Lazy Loading
+   - SplashCursor with React.lazy + Suspense
+   - Fallback={null} for smooth loading
+
+2. Conditional Rendering
+   - Heavy animations only on desktop
+   - Mobile optimizations
+
+3. Three.js Cleanup
+   - Proper geometry.dispose()
+   - material.dispose()
+   - renderer.dispose()
+   - RequestAnimationFrame cleanup
+
+4. Event Management
+   - Scroll listeners removed on unmount
+   - Resize listeners cleaned up
+   - No memory leaks
+
+5. CSS Optimization
+   - Tailwind JIT compilation
+   - No CSS-in-JS overhead
+
+## SEO METADATA
+
+Title: "Anil Sai Nunna | Full Stack Web Developer"
+Description: "Full Stack Developer skilled in React, Node.js, Express, MongoDB"
+
+Open Graph:
+- og:type: website
+- og:title: Portfolio title
+- og:image: https://anilsai-portfolio.vercel.app/anil.png
+
+Schema.org:
+- Person schema with contact links
+- Links to GitHub, LinkedIn, Twitter, Instagram
+
+Technical:
+- robots: index, follow
+- sitemap.xml
+- robots.txt
+- Google Site Verification
+
+## DEPLOYMENT FLOW
+
+1. Push to GitHub main
+2. Vercel webhook triggered
+3. Vite builds: npm run build
+4. Optimized output to ./dist
+5. Deployed to Vercel edge network
+6. Auto-scaling, caching, optimization
+
+## RECENT IMPROVEMENTS
+
+✓ Fixed WebGL 3D texture errors (removed map/alphaTest)
+✓ Added DrawerTitle for accessibility
+✓ Replaced aria-hidden with inert attribute
+✓ Created manifest.json for PWA
+✓ Fixed favicon configuration
+✓ Removed Framer Motion scroll warning
+✓ Cleaned up unused imports
+
+## PROJECTS FEATURED
+
+1. Task Manager - Fintech Dashboard
+   Stack: React, WebSockets, Graph.js
+   Live: https://task-manager-anil.vercel.app/
+
+2. TypeVex - Typing Platform
+   Stack: React, Express, OAuth, Graph.js
+   Live: http://typevex.vercel.app/
+
+3. Scrybyx Notes - Notes App
+   Stack: React, Three.js, localStorage
+   Live: https://scribyx-notes.vercel.app/
+
+4. Voxvera - Language Translator
+   Stack: React, GT-api, i18n
+   Live: https://voxvera.vercel.app/
+
+5. Phone Book - Contact Manager
+   Stack: React, Node.js, MongoDB
+   Live: https://anil-s-phone-book.vercel.app/
+
+6. Vextron - Chatbot
+   Stack: WebAssembly, C++, WebGL
+
+## KEY FUNCTIONS
+
+useScroll():
+- Tracks window scroll position
+- Returns scrollY MotionValue
+- Used for scroll-linked animations
+
+useTransform():
+- Creates derived MotionValue
+- Maps scroll progress to CSS properties
+- Creates parallax, fade, blur effects
+
+useMotionValueEvent():
+- Listens to MotionValue changes
+- Triggers state updates
+- Updates navbar visibility
+
+scrollIntoView():
+- Smooth scroll to section
+- Called on nav item click
+- Auto-closes drawer on mobile
+
+## IMPORTANT FILES
+
+App.jsx - Main component, state, layout
+Home.jsx - 3D particle hero
+navbar.jsx - Navigation bar
+drawer.jsx - Glass-morphism drawer
+Projects.jsx - Project carousel
+App.css - Global styles + theme vars
+index.html - Meta tags, manifest link
+
+## DEPENDENCIES
+
+react, react-dom (UI)
+framer-motion (Animations)
+three (3D graphics)
+tailwindcss (Styling)
+vite (Build)
+lucide-react (Icons)
+vaul (Drawer)
+tabler/icons-react (Icons)
+
+## SUMMARY FOR AI
+
+This is a PREMIUM MODERN PORTFOLIO showcasing full-stack development expertise.
+It demonstrates:
+- Advanced React patterns & hooks
+- Complex animations & 3D graphics
+- Responsive design & accessibility
+- Performance optimization
+- Modern tooling & best practices
+- Professional UI/UX design
+- SEO & web standards
+
+The app is production-ready, performant, accessible, and serves as both
+a professional portfolio and a technical demonstration of modern web development.
+
+Architecture is clean, well-organized, and maintainable with clear separation
+of concerns between components, animations, and styling.
+
+All interactive features enhance user engagement while maintaining
+accessibility and performance standards.
