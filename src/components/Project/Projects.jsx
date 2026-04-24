@@ -52,9 +52,9 @@ const PROJECTS = [
     },
     {
         id: 6, title: "Vextron", category: "Chatbot",
-        description: "Browser-based 3D modeling tool for architects and game designers with real-time collaboration.",
+        description: "Vextron AI is a conversational chatbot application powered by Gemini API, delivering intelligent, real-time responses.",
         image: "/Vex.png",
-        tags: ["WebAssembly", "C++", "WebGL", "Firebase"],
+        tags: ["Next.js", "sequlize-ORM", "PostgreSQL", "GT-api"],
         link: "https://vextronai.vercel.app/",
         github: "https://github.com/sandeep9349/chat-bot",
         icon: <ExternalLink className="w-5 h-5" />,
